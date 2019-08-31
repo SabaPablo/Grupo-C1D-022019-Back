@@ -4,4 +4,4 @@ jdk:
 services:
   - postgresql
 os: linux
-install: gradle wrapper --gradle-version 4.2
+install: gradle wrapper --gradle-version 5.5.1
