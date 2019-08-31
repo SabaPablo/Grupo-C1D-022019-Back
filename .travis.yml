@@ -1,9 +1,7 @@
-language:
-  java
-
-sudo: required
-
+language: java
+jdk:
+  - openjdk8
+services:
+  - postgresql
 before_install:
-  - chmod +x mvnw
-  - sudo apt-get install jq
-  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar https://github.com/codacy/codacy-coverage-reporter/releases/download/6.0.0/codacy-coverage-reporter-6.0.0-assembly.jar
+  - chmod +x gradlew
