@@ -3,9 +3,6 @@ jdk:
   - openjdk8
 services:
   - postgresql
-before_install:
-  - chmod +x gradlew
-cache:
-  directories:
-    - "${HOME}/.gradle/caches/"
-    - "${HOME}/.gradle/wrapper/"
+os: linux
+script:
+  - ./gradlew build --scan -s
