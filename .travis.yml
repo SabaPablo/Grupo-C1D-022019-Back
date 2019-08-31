@@ -3,3 +3,5 @@ jdk:
   - openjdk8
 before_install:
   gradle wrapper
+install:
+  - ./gradlew assemble -x signArchives
