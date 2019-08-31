@@ -4,5 +4,4 @@ jdk:
 services:
   - postgresql
 os: linux
-script:
-  - ./gradlew build --scan -s
+install: gradle wrapper --gradle-version 4.2
