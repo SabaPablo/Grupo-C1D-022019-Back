@@ -11,6 +11,7 @@ class ViendasyaApplicationTests {
 
 	@Test
 	fun contextLoads() {
+		assert(true)
 	}
 
 }
