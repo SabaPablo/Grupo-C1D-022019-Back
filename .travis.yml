@@ -4,4 +4,6 @@ jdk:
 services:
   - postgresql
 os: linux
-install: gradle wrapper --gradle-version 5.5.1
+install: gradle wrapper --gradle-version 6.0
+script:
+  - ./gradlew test build
