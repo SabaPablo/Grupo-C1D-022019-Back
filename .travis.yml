@@ -5,3 +5,8 @@ services:
   - postgresql
 before_install:
   - chmod +x gradlew
+  - chmod +x gradle/wrapper/gradle-wrapper.jar
+cache:
+  directories:
+    - "${HOME}/.gradle/caches/"
+    - "${HOME}/.gradle/wrapper/"
