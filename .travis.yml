@@ -8,8 +8,5 @@ before_install:
 addons:
   postgresql: "9.6" // change "9.5" for your postgres specific version
 
-before_script:
-  - psql -c "create database aries;" -U postgres
-  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
 services:
   - postgresql
