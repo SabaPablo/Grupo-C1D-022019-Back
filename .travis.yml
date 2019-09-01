@@ -1,7 +1,8 @@
 language: java
 jdk:
-  - openjdk8
+  - oraclejdk8
+sudo: required
+before_install:
+  - chmod +x gradlew
 script:
-  - ./gradlew check
-  - ./gradlew integrationTest
-  - ./gradlew jacocoTestReport
+  - ./gradlew clean build -i --continue
