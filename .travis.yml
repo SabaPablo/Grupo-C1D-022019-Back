@@ -5,8 +5,5 @@ install: gradle wrapper --gradle-version 4.4
 before_install:
   - chmod +x gradlew
 
-addons:
-  postgresql: "9.6" // change "9.5" for your postgres specific version
-
 services:
   - postgresql
