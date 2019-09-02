@@ -9,6 +9,12 @@ sudo: enabled
 before_script:
   - psql -c "create database desa;" -U postgres
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password ''"
-
+addons:
+  postgresql: '10'
+  apt:
+    packages:
+      - postgresql-10-postgis-2.4
+      - postgresql-10-postgis-2.4-scripts
+      - postgresql-client-10
 services:
   - postgresql
