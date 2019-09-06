@@ -22,6 +22,18 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	/*
+	// Koin for Kotlin
+	val koin_version = "2.0.1"
+	implementation("org.koin:koin-core:$koin_version")
+	// Koin extended & experimental features
+	implementation("org.koin:koin-core-ext:$koin_version")
+	// Koin for Unit tests
+	testImplementation("org.koin:koin-test:$koin_version")
+	// Koin for Java developers
+	implementation("org.koin:koin-java:$koin_version")
+	
+	 */
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
