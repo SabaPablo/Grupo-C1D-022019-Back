@@ -1,0 +1,17 @@
+language: java
+jdk:
+  - openjdk8
+install: gradle wrapper --gradle-version 4.4
+before_install:
+  - chmod +x gradlew
+sudo: enabled
+
+before_script:
+  - psql -c "create database desa;" -U postgres
+  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password ''"
+
+addons:
+  postgresql: "9.6"
+
+services:
+  - postgresql

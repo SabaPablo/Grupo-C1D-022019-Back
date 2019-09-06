@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest
 class ViendasyaApplicationTests {
 
-	@Test
-	fun contextLoads() {
-	}
-
+    @Test
+    fun test() {
+        assert(true)
+    }
 }
