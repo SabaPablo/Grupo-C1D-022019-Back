@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 @Table(name = "users")
-class UserModel {
+class ClientModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
