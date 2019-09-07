@@ -1,13 +1,14 @@
 package com.unq.viendasya.model
 
-import java.util.*
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
 
 class Menu (
     var name: String,
     var description: String,
     var deliveryValue: Double,
-    var validity: Date,
-    var expiration: Date,
+    var validity: LocalDate,
+    var expiration: LocalDate,
     //Turnos/Horarios de entrega/Envio
     var turn: String,
     var deliveryTime: String,
@@ -24,8 +25,8 @@ class Menu (
             var name: String = "",
             var description: String = "",
             var deliveryValue: Double = 0.0,
-            var validity: Date = Date(),
-            var expiration: Date = Date(),
+            var validity: LocalDate = LocalDate(),
+            var expiration: LocalDate = LocalDate(),
             //Turnos/Horarios de entrega/Envio
             var turn: String = "",
             var deliveryTime: String = "",
@@ -43,8 +44,8 @@ class Menu (
         fun description(description: String) = apply { this.description= description}
         fun category(category: ServiceCategory) = apply { this.category.add(category)}
         fun deliveryValue(deliveryValue: Double) = apply { this.deliveryValue= deliveryValue}
-        fun validity(validity: Date) = apply { this.validity= validity}
-        fun expiration(expiration: Date) = apply { this.expiration= expiration}
+        fun validity(validity: LocalDate) = apply { this.validity= validity}
+        fun expiration(expiration: LocalDate) = apply { this.expiration= expiration}
         fun turn(turn: String) = apply { this.turn= turn}
         fun deliveryTime(deliveryTime: String) = apply { this.deliveryTime= deliveryTime}
         fun price(price: Double) = apply { this.price= price}

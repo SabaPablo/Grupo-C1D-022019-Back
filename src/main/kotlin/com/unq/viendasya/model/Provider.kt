@@ -1,5 +1,8 @@
 package com.unq.viendasya.model
 
+import com.unq.viendasya.exception.CurrencyMenuException
+import org.joda.time.LocalDate
+
 class Provider(
     var name: String,
     var logo: String,
@@ -16,8 +19,22 @@ class Provider(
     var menues :MutableList<Menu>
     ) {
     fun addMenu(menu: Menu) {
-        menues.add(menu)
+        if(getCantCurrentMenues() > 10){
+            throw CurrencyMenuException("Superaste el maximo de menues vigentes")
+        }else {
+            menues.add(menu)
+        }
 
+    }
+
+    private fun getCantCurrentMenues(): Int {
+        var count = 0
+        menues.forEach{menu ->
+            if(menu.expiration.isAfter(LocalDate.now())){
+                count++
+            }
+        }
+        return count
     }
 
     data class Builder(
