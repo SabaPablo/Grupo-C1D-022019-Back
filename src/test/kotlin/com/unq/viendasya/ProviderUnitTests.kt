@@ -14,7 +14,7 @@ import java.util.*
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class ProviderUnitTest {
+class ProviderUnitTests {
 
     @Test
     fun createAProviderAndGetHisName() {
