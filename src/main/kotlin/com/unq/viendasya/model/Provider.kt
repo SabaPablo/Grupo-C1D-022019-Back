@@ -13,8 +13,12 @@ class Provider(
     var disponibility: String,
     //Distancia maxima entrega
     var distanceDelivery: Int,
-    var menues :MutableList<MenuModel>
+    var menues :MutableList<Menu>
     ) {
+    fun addMenu(menu: Menu) {
+        menues.add(menu)
+
+    }
 
     data class Builder(
             var name: String = "",
@@ -29,7 +33,7 @@ class Provider(
             var disponibility: String = "",
             //Distancia maxima entrega
             var distanceDelivery: Int = 0,
-            var menues :MutableList<MenuModel> = mutableListOf()) {
+            var menues :MutableList<Menu> = mutableListOf()) {
 
         fun name(name: String) = apply { this.name = name }
         fun logo(logo: String) = apply { this.logo = logo }
@@ -40,7 +44,7 @@ class Provider(
         fun mail(mail: String) = apply { this.mail = mail }
         fun phone(phone: String) = apply { this.phone = phone }
         fun disponibility(disponibility: String) = apply { this.disponibility = disponibility }
-        fun menues(menues: MutableList<MenuModel>) = apply { this.menues = menues }
+        fun menues(menues: MutableList<Menu>) = apply { this.menues = menues }
         fun build() = Provider(name, logo, location, address, description, webSite, mail, phone, disponibility, distanceDelivery, menues)
     }
 
