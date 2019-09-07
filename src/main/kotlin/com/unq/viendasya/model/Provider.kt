@@ -19,7 +19,7 @@ class Provider(
     var menues :MutableList<Menu>
     ) {
     fun addMenu(menu: Menu) {
-        if(getCantCurrentMenues() > 10){
+        if(getCantCurrentMenues() >= 20){
             throw CurrencyMenuException("Superaste el maximo de menues vigentes")
         }else {
             menues.add(menu)
