@@ -1,6 +1,7 @@
 package com.unq.viendasya.model
 
 import org.joda.time.LocalDate
+import org.joda.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -31,7 +32,7 @@ class Menu (
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
     val orders: MutableSet<Order> = mutableSetOf()
 
-    fun ordersOfDay(date: LocalDate): Int {
+    fun ordersOfDay(date: LocalDateTime): Int {
         val ordersOfDay = orders.filter { it.date.year == date.year &&
                 it.date.monthOfYear == date.monthOfYear
                 && it.date.dayOfMonth == date.dayOfMonth}
