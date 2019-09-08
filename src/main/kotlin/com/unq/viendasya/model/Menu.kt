@@ -1,8 +1,10 @@
 package com.unq.viendasya.model
 
-import org.joda.time.DateTime
 import org.joda.time.LocalDate
+import javax.persistence.*
 
+@Entity
+@Table(name = "menu")
 class Menu (
     var name: String,
     var description: String,
@@ -19,7 +21,11 @@ class Menu (
     var priceCantMax: Double,
     var cantMaxPeerDay: Int) {
 
-    val category: MutableList<ServiceCategory> = mutableListOf()
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Int = 0
+
+    //val category: MutableList<ServiceCategory> = mutableListOf()
 
     data class Builder(
             var name: String = "",
@@ -38,11 +44,11 @@ class Menu (
             var cantMaxPeerDay: Int = 0
     ){
 
-        val category: MutableList<ServiceCategory> = mutableListOf()
+        //val category: MutableList<ServiceCategory> = mutableListOf()
 
         fun name(name: String) = apply { this.name = name }
         fun description(description: String) = apply { this.description= description}
-        fun category(category: ServiceCategory) = apply { this.category.add(category)}
+        //fun category(category: ServiceCategory) = apply { this.category.add(category)}
         fun deliveryValue(deliveryValue: Double) = apply { this.deliveryValue= deliveryValue}
         fun validity(validity: LocalDate) = apply { this.validity= validity}
         fun expiration(expiration: LocalDate) = apply { this.expiration= expiration}

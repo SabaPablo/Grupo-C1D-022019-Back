@@ -16,7 +16,7 @@ class Provider(
     var disponibility: String,
     //Distancia maxima entrega
     var distanceDelivery: Int,
-    var menues :MutableList<Menu>
+    var menues: MutableList<Menu>
     ) {
     fun addMenu(menu: Menu) {
         if(getCantCurrentMenues() >= 20){

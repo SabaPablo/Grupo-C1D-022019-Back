@@ -1,5 +1,6 @@
 package com.unq.viendasya.model
 
+import java.time.LocalDate
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
@@ -12,7 +13,23 @@ class Client(
         var phone: String,
         var location: String) {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
+
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
+    val orders: MutableSet<Order> = mutableSetOf()
+
+    fun createOrder(menu: Menu,cant : Int, date: LocalDate) {
+        val order = Order.Builder(menu)
+                .cant(cant)
+                .date(date)
+                .client(this)
+                .build()
+        orders.add(order)
+    }
+
 
     data class Builder(
             var name: String = "",

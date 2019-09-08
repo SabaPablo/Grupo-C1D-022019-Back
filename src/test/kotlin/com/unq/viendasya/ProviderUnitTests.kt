@@ -25,12 +25,14 @@ class ProviderUnitTests {
 
     @Test
     fun createAProviderAndAddedAMenu() {
-        val provider = Provider.Builder().name("Pizzarro")
+        val provider = Provider.Builder()
+                .name("Pizzarro")
                 .address("Calle Falsa 123")
                 .description("Pizzeria con las mejores pizzas")
                 .disponibility("L a V 4 a 18")
                 .phone("555-5555")
-                .location("Lat: 3.44, ").build()
+                .location("Lat: 3.44, ")
+                .build()
 
 
         val menu: Menu = Menu.Builder().name("Pizzas Individuales con Cerveza")
