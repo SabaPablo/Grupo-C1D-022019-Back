@@ -1,9 +1,8 @@
 package com.unq.viendasya.model
 
-import java.time.LocalDate
+import com.unq.viendasya.exception.MaxCantPeerDayException
+import org.joda.time.LocalDate
 import javax.persistence.*
-import javax.validation.constraints.Email
-import javax.validation.constraints.NotBlank
 
 @Entity
 @Table(name = "users")
@@ -22,12 +21,22 @@ class Client(
     val orders: MutableSet<Order> = mutableSetOf()
 
     fun createOrder(menu: Menu,cant : Int, date: LocalDate) {
-        val order = Order.Builder(menu)
-                .cant(cant)
-                .date(date)
-                .client(this)
-                .build()
-        orders.add(order)
+        if(canOrderByCant(menu, cant, date)){
+            val order = Order.Builder(menu)
+                    .cant(cant)
+                    .date(date)
+                    .client(this)
+                    .build()
+            orders.add(order)
+            menu.addOrder(order)
+        } else {
+            throw MaxCantPeerDayException("El menu alcanzo el limite de compra por dia")
+        }
+
+    }
+
+    private fun canOrderByCant(menu: Menu, cant: Int, date: LocalDate): Boolean {
+        return menu.cantMaxPeerDay > cant + menu.ordersOfDay(date)
     }
 
 

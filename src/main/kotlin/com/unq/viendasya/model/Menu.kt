@@ -28,6 +28,25 @@ class Menu (
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
 
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
+    val orders: MutableSet<Order> = mutableSetOf()
+
+    fun ordersOfDay(date: LocalDate): Int {
+        val ordersOfDay = orders.filter { it.date.year == date.year &&
+                it.date.monthOfYear == date.monthOfYear
+                && it.date.dayOfMonth == date.dayOfMonth}
+        var cantOrdersInTheDay = 0
+        ordersOfDay.forEach { ood ->
+            cantOrdersInTheDay += ood.cant
+        }
+        return cantOrdersInTheDay
+    }
+
+    fun addOrder(order: Order) {
+        orders.add(order)
+    }
+
+
     //val category: MutableList<ServiceCategory> = mutableListOf()
 
     data class Builder(

@@ -1,6 +1,6 @@
 package com.unq.viendasya.model
 
-import java.time.LocalDate
+import org.joda.time.LocalDate
 import javax.persistence.*
 
 @Entity

@@ -1,5 +1,6 @@
 package com.unq.viendasya
 
+import com.unq.viendasya.exception.MaxCantPeerDayException
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
 import org.joda.time.LocalDate
@@ -32,7 +33,61 @@ class ClientUnitTests {
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
 
-        client.createOrder(menu,10,java.time.LocalDate.now())
+        client.createOrder(menu,10,LocalDate.now())
         Assert.assertEquals(client.orders.size, 1)
+    }
+
+    @Test(expected = MaxCantPeerDayException::class)
+    fun createAClientAndBuildAMenuAndPassTheMaxCantPeerDay() {
+        val client = Client.Builder().name("zaraza")
+                .email("zaraza@mail.com")
+                .phone("3344-4332").build()
+
+        val menu: Menu = Menu.Builder().name("menu 11")
+                .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
+                .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
+
+
+        client.createOrder(menu,51,LocalDate.now())
+    }
+
+    fun notPassTheMaxCantPeerDayForTwoClients() {
+        val client = Client.Builder().name("zaraza")
+                .email("zaraza@mail.com")
+                .phone("3344-4332").build()
+
+        val client2 = Client.Builder().name("zaraza2")
+                .email("zaraza2@mail.com").build()
+
+        val menu: Menu = Menu.Builder().name("menu 1")
+                .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
+                .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
+
+        client.createOrder(menu,10,LocalDate.now())
+
+
+        client2.createOrder(menu,30,LocalDate.now())
+
+        Assert.assertEquals(client.orders.size, 1)
+        Assert.assertEquals(client.orders.size, 1)
+    }
+
+    @Test(expected = MaxCantPeerDayException::class)
+    fun passTheMaxCantPeerDayForTwoClients() {
+        val client = Client.Builder().name("zaraza")
+                .email("zaraza@mail.com")
+                .phone("3344-4332").build()
+
+        val client2 = Client.Builder().name("zaraza2")
+                .email("zaraza2@mail.com").build()
+
+        val menu: Menu = Menu.Builder().name("menu 1")
+                .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
+                .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
+
+        client.createOrder(menu,30,LocalDate.now())
+
+
+        client2.createOrder(menu,30,LocalDate.now())
     }
 }
