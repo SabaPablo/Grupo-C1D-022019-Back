@@ -37,7 +37,7 @@ class ProviderUnitTests {
 
         val menu: Menu = Menu.Builder().name("Pizzas Individuales con Cerveza")
                 .price(100.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
-                .priceCantMin(110.0).priceCantMax(90.0).build()
+                .priceCantMin(110.0).priceCantMax(90.0).provider(provider).build()
 
         provider.addMenu(menu)
 
@@ -55,13 +55,13 @@ class ProviderUnitTests {
 
         val menu: Menu = Menu.Builder().name("Pizzas Individuales con Cerveza")
                 .price(100.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
-                .priceCantMin(110.0).priceCantMax(90.0).build()
+                .priceCantMin(110.0).priceCantMax(90.0).provider(provider).build()
 
         provider.addMenu(menu)
 
         val menu2: Menu = Menu.Builder().name("Pizzas con Gaseosa")
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
-                .priceCantMin(210.0).priceCantMax(190.0).build()
+                .priceCantMin(210.0).priceCantMax(190.0).provider(provider).build()
 
         provider.addMenu(menu2)
 
@@ -80,14 +80,15 @@ class ProviderUnitTests {
         for (i in 1..20) {
             val menu: Menu = Menu.Builder().name("menu $i")
                     .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
-                    .priceCantMin(210.0).priceCantMax(190.0).expiration(LocalDate().plusDays(1)).build()
+                    .priceCantMin(210.0).priceCantMax(190.0)
+                    .provider(provider).expiration(LocalDate().plusDays(1)).build()
 
             provider.addMenu(menu)
         }
 
         val menu: Menu = Menu.Builder().name("menu 11")
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
-                .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
+                .priceCantMin(210.0).expiration(LocalDate()).provider(provider).priceCantMax(190.0).build()
 
         provider.addMenu(menu)
 
@@ -111,7 +112,8 @@ class ProviderUnitTests {
 
         val menu: Menu = Menu.Builder().name("menu 11")
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
-                .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
+                .priceCantMin(210.0).expiration(LocalDate()).provider(provider)
+                .priceCantMax(190.0).build()
 
         provider.addMenu(menu)
         Assert.assertEquals(21, provider.menues.size )

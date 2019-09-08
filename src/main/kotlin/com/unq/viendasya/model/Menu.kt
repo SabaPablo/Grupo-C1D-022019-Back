@@ -4,7 +4,7 @@ import org.joda.time.LocalDate
 import javax.persistence.*
 
 @Entity
-@Table(name = "menu")
+@Table(name = "menues")
 class Menu (
     var name: String,
     var description: String,
@@ -19,7 +19,10 @@ class Menu (
     var priceCantMin: Double,
     var cantMax : Int,
     var priceCantMax: Double,
-    var cantMaxPeerDay: Int) {
+    var cantMaxPeerDay: Int,
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "provider_id", referencedColumnName = "id")
+    var provider: Provider) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,7 +44,8 @@ class Menu (
             var priceCantMin: Double = 0.0,
             var cantMax : Int = 0,
             var priceCantMax: Double = 0.0,
-            var cantMaxPeerDay: Int = 0
+            var cantMaxPeerDay: Int = 0,
+            var provider: Provider = Provider.Builder().build()
     ){
 
         //val category: MutableList<ServiceCategory> = mutableListOf()
@@ -60,10 +64,11 @@ class Menu (
         fun cantMax(cantMax: Int) = apply { this.cantMax= cantMax}
         fun priceCantMax(priceCantMax: Double) = apply { this.priceCantMax= priceCantMax}
         fun cantMaxPeerDay(cantMaxPeerDay: Int) = apply { this.cantMaxPeerDay= cantMaxPeerDay}
+        fun provider(provider: Provider) = apply { this.provider= provider}
 
 
         fun build() = Menu(name, description, deliveryValue, validity, expiration, turn,
-                deliveryTime, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay)
+                deliveryTime, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
 
     }
 
