@@ -2,7 +2,10 @@ package com.unq.viendasya.model
 
 import com.unq.viendasya.exception.CurrencyMenuException
 import org.joda.time.LocalDate
+import javax.persistence.*
 
+@Entity
+@Table(name = "providers")
 class Provider(
     var name: String,
     var logo: String,
@@ -16,8 +19,14 @@ class Provider(
     var disponibility: String,
     //Distancia maxima entrega
     var distanceDelivery: Int,
-    var menues :MutableList<Menu>
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "provider")
+    var menues: MutableList<Menu>
     ) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Int = 0
+
     fun addMenu(menu: Menu) {
         if(getCantCurrentMenues() >= 20){
             throw CurrencyMenuException("Superaste el maximo de menues vigentes")
