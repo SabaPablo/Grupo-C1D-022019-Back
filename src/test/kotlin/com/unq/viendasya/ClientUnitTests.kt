@@ -1,6 +1,7 @@
 package com.unq.viendasya
 
 import com.unq.viendasya.exception.AheadOfTimeException
+import com.unq.viendasya.exception.InsufficientCreditException
 import com.unq.viendasya.exception.MaxCantPeerDayException
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
@@ -31,11 +32,11 @@ class ClientUnitTests {
                 .phone("3344-4332").build()
 
         val menu: Menu = Menu.Builder().name("menu 11")
-                .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
+                .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
 
-        client.createOrder(menu,10, LocalDateTime.now().plusHours(49))
+        client.createOrder(menu,10, LocalDateTime.now().plusDays(3))
         Assert.assertEquals(client.orders.size, 1)
     }
 
@@ -110,7 +111,7 @@ class ClientUnitTests {
                 .email("zaraza2@mail.com").build()
 
         val menu: Menu = Menu.Builder().name("menu 1")
-                .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
+                .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
         client.createOrder(menu,30,LocalDateTime.now().plusDays(4))
@@ -131,5 +132,40 @@ class ClientUnitTests {
 
 
         client.createOrder(menu,3,LocalDateTime.now())
+    }
+
+    @Test
+    fun clientCanChargeCreditInYourAccount(){
+        val client = Client.Builder().creditAccount(100.0).build()
+        val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
+
+        client.chargeCredit(500.0)
+        client.createOrder(menu,1, LocalDateTime.now().plusDays(3))
+
+        Assert.assertEquals(client.orders.size, 1)
+        Assert.assertEquals(400.0 ,client.accountBalance(), 0.01)
+    }
+
+    @Test
+    fun clientCanPurchase2Menues(){
+        val client = Client.Builder().creditAccount(100.0).build()
+        val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
+
+        client.chargeCredit(500.0)
+        client.createOrder(menu,2, LocalDateTime.now().plusDays(3))
+
+        Assert.assertEquals(client.orders.size, 1)
+        Assert.assertEquals(200.0 ,client.accountBalance(), 0.01)
+    }
+
+    @Test(expected = InsufficientCreditException::class)
+    fun clientCantPurchaseAMenue(){
+        val client = Client.Builder().creditAccount(100.0).build()
+        val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
+
+        client.chargeCredit(100.0)
+        client.createOrder(menu,2, LocalDateTime.now().plusDays(3))
+
+        Assert.assertEquals(200.0 ,client.accountBalance(), 0.01)
     }
 }
