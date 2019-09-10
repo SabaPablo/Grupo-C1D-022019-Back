@@ -1,7 +1,6 @@
 package com.unq.viendasya.repository
 
-import com.unq.viendasya.model.Client
+import com.unq.viendasya.model.Provider
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface ClientRepository : JpaRepository<Client, Int> {
-}
+interface ProviderRepository : JpaRepository<Provider, Int>

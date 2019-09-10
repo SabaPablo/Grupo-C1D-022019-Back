@@ -1,6 +1,6 @@
 package com.unq.viendasya.controller
 
-import com.unq.viendasya.model.ClientModel
+import com.unq.viendasya.model.Client
 import com.unq.viendasya.repository.ClientRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -14,12 +14,12 @@ class ClientController(@Autowired private val  clientRepository : ClientReposito
 
 
     @GetMapping("/clients")
-    fun getClients(pageable : Pageable) : Page<ClientModel> {
+    fun getClients(pageable : Pageable) : Page<Client> {
         return clientRepository.findAll(pageable)
     }
 
     @PostMapping("/clients")
-    fun createClient(@Valid @RequestBody user : ClientModel) : ClientModel {
+    fun createClient(@Valid @RequestBody user : Client) : Client {
         return clientRepository.save(user)
     }
 
