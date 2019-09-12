@@ -21,6 +21,19 @@ class Order (
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
 
+    fun menuPrice(): Double {
+        var price = menu.price
+
+        if( cant >= menu.cantMax){
+            price = menu.priceCantMax
+        }else{
+            if(cant >= menu.cantMin){
+                price = menu.priceCantMin
+            }
+        }
+       return price
+    }
+
     data class Builder(
             var menu: Menu,
             var cant: Int = 0,
