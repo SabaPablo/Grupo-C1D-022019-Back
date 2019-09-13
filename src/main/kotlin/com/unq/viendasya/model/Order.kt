@@ -34,6 +34,12 @@ class Order (
        return price
     }
 
+    fun close(){
+        val priceDiff = this.cant * (menu.price - this.menuPrice())
+        this.client.chargeCredit(priceDiff)
+        //this.client.sendMailsConfirmation()
+    }
+
     data class Builder(
             var menu: Menu,
             var cant: Int = 0,
