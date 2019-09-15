@@ -32,6 +32,10 @@ class Menu (
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
     val orders: MutableSet<Order> = mutableSetOf()
 
+    fun standarPrice(): Double{
+        return this.price
+    }
+
     fun ordersOfDay(date: LocalDateTime): Int {
         val ordersOfDay = orders.filter { it.date.year == date.year &&
                 it.date.monthOfYear == date.monthOfYear

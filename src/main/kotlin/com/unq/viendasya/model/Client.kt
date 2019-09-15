@@ -24,9 +24,9 @@ class Client(
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
     val orders: MutableSet<Order> = mutableSetOf()
 
-    fun createOrder(menu: Menu,cant : Int, date: LocalDateTime) {
+    fun createOrder(provider: Provider, menu: Menu, cant : Int, date: LocalDateTime) {
         if(onTimeForOffer(date)){
-            if(canOrderByCant(menu, cant, date)){
+            if(provider.canOrderByCant(menu, cant, date)){
                 if(canOrderByMoney(menu, cant)) {
                     this.deductMoney(menu.price * cant)
                     val order = Order.Builder(menu)
@@ -35,7 +35,7 @@ class Client(
                             .client(this)
                             .build()
                     orders.add(order)
-                    menu.addOrder(order)
+                    provider.addOrder(order)
                 }else{
                     throw InsufficientCreditException("Debería hacer una nueva carga de dinero para realizar la compra")
                 }
@@ -62,9 +62,6 @@ class Client(
         return diference.hours > 48
     }
 
-    private fun canOrderByCant(menu: Menu, cant: Int, date: LocalDateTime): Boolean {
-        return menu.cantMaxPeerDay > cant + menu.ordersOfDay(date)
-    }
 
     fun chargeCredit(anAmmount: Double) {
         this.creditAccount = this.creditAccount + anAmmount

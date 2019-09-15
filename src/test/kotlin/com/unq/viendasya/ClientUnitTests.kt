@@ -5,6 +5,7 @@ import com.unq.viendasya.exception.InsufficientCreditException
 import com.unq.viendasya.exception.MaxCantPeerDayException
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
+import com.unq.viendasya.model.Provider
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.junit.Assert
@@ -35,8 +36,8 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-
-        client.createOrder(menu,10, LocalDateTime.now().plusDays(3))
+        val provider = Provider.Builder().build()
+        client.createOrder(provider,menu,10, LocalDateTime.now().plusDays(3))
         Assert.assertEquals(client.orders.size, 1)
     }
 
@@ -45,13 +46,15 @@ class ClientUnitTests {
         val client = Client.Builder().name("zaraza")
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
+//TODO LIMPIAR LAS COSAS DE LOS TEST Q NO TIENEN SENTIDO EJ name, email y phone DE UN CLIENTE Q NO ME IMPORTAN ESOS DATOS
 
         val menu: Menu = Menu.Builder().name("menu 11")
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
+        val provider = Provider.Builder().build()
 
-        client.createOrder(menu,51,LocalDateTime.now().plusHours(96))
+        client.createOrder(provider, menu,51, LocalDateTime.now().plusHours(96))
     }
 
     fun notPassTheMaxCantPeerDayForTwoClients() {
@@ -66,10 +69,12 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        client.createOrder(menu,10,LocalDateTime.now())
+        val provider = Provider.Builder().build()
+
+        client.createOrder(provider, menu,10,LocalDateTime.now())
 
 
-        client2.createOrder(menu,30,LocalDateTime.now())
+        client2.createOrder(provider, menu,30,LocalDateTime.now())
 
         Assert.assertEquals(client.orders.size, 1)
         Assert.assertEquals(client.orders.size, 1)
@@ -89,12 +94,14 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        client.createOrder(menu,10,LocalDateTime.now())
+        val provider = Provider.Builder().build()
 
-        client3.createOrder(menu,30,LocalDateTime.now().plusDays(4))
+        client.createOrder(provider, menu,10,LocalDateTime.now())
 
-        client2.createOrder(menu,30,LocalDateTime.now())
-        client2.createOrder(menu,30,LocalDateTime.now().plusDays(5))
+        client3.createOrder(provider, menu,30,LocalDateTime.now().plusDays(4))
+
+        client2.createOrder(provider, menu,30,LocalDateTime.now())
+        client2.createOrder(provider, menu,30,LocalDateTime.now().plusDays(5))
 
 
         Assert.assertEquals(client.orders.size, 1)
@@ -114,10 +121,11 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        client.createOrder(menu,30,LocalDateTime.now().plusDays(4))
+        val provider = Provider.Builder().build()
 
+        client.createOrder(provider, menu,30,LocalDateTime.now().plusDays(4))
 
-        client2.createOrder(menu,30,LocalDateTime.now().plusDays(4))
+        client2.createOrder(provider, menu,30,LocalDateTime.now().plusDays(4))
     }
 
     @Test(expected = AheadOfTimeException::class)
@@ -130,8 +138,9 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
+        val provider = Provider.Builder().build()
 
-        client.createOrder(menu,3,LocalDateTime.now())
+        client.createOrder(provider, menu,3,LocalDateTime.now())
     }
 
     @Test
@@ -139,8 +148,10 @@ class ClientUnitTests {
         val client = Client.Builder().creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
+        val provider = Provider.Builder().build()
+
         client.chargeCredit(500.0)
-        client.createOrder(menu,1, LocalDateTime.now().plusDays(3))
+        client.createOrder(provider, menu,1, LocalDateTime.now().plusDays(3))
 
         Assert.assertEquals(client.orders.size, 1)
         Assert.assertEquals(400.0 ,client.accountBalance(), 0.01)
@@ -151,8 +162,10 @@ class ClientUnitTests {
         val client = Client.Builder().creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
+        val provider = Provider.Builder().build()
+
         client.chargeCredit(500.0)
-        client.createOrder(menu,2, LocalDateTime.now().plusDays(3))
+        client.createOrder(provider, menu,2, LocalDateTime.now().plusDays(3))
 
         Assert.assertEquals(client.orders.size, 1)
         Assert.assertEquals(200.0 ,client.accountBalance(), 0.01)
@@ -163,8 +176,10 @@ class ClientUnitTests {
         val client = Client.Builder().creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
+        val provider = Provider.Builder().build()
+
         client.chargeCredit(100.0)
-        client.createOrder(menu,2, LocalDateTime.now().plusDays(3))
+        client.createOrder(provider, menu,2, LocalDateTime.now().plusDays(3))
 
         Assert.assertEquals(200.0 ,client.accountBalance(), 0.01)
     }
