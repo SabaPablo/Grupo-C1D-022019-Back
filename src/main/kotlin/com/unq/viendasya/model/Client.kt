@@ -35,7 +35,7 @@ class Client(
                             .client(this)
                             .build()
                     orders.add(order)
-                    provider.addOrder(order)
+                    provider.addOrder(order, menu)
                 }else{
                     throw InsufficientCreditException("Debería hacer una nueva carga de dinero para realizar la compra")
                 }

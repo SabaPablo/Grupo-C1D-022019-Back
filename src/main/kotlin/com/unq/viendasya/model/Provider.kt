@@ -22,9 +22,7 @@ class Provider(
     var distanceDelivery: Int,
     var creditAccount: Double,
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "provider")
-    var menues: MutableList<Menu>,
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "provider")
-    var orders: MutableList<Order>
+    var menues: MutableList<Menu>
     ) {
 
     @Id
@@ -35,6 +33,7 @@ class Provider(
         if(getCantCurrentMenues() >= 20){
             throw CurrencyMenuException("Superaste el maximo de menues vigentes")
         }else {
+            menu.provider = this
             menues.add(menu)
         }
 
@@ -52,24 +51,24 @@ class Provider(
 
     fun quatityOrdersOf(aMenu: Menu): Int {
         var ret = 0
-        val order = orders.find { order -> order.menu == aMenu  }
+        val order = aMenu.orders.find { order -> order.menu == aMenu  }
         if (order != null) {
             ret = order.cant()
         }
         return ret
     }
 
-    fun addOrder(order: Order) {
-        orders.add(order)
-        creditAccount = creditAccount + (order.menu.standarPrice() * order.cant)
+    fun addOrder(order: Order, menu: Menu) {
+        menu.orders.add(order)
+        //creditAccount = creditAccount + (order.menu.standarPrice() * order.cant)
     }
 
     fun canOrderByCant(menu: Menu, cant: Int, date: LocalDateTime): Boolean {
         var canOrder = false
 
         if(menu.cantMaxPeerDay > cant){
-            if( orders.size !== 0 ){
-                val order = this.orders.filter { order -> order.menu == menu }
+            if( menu.orders.size !== 0 ){
+                val order = menu.orders.filter { order -> order.menu == menu }
                 //TODO CUANDO USEMOS BIEN TEMA FECHA HAYQ AGREGAR ESTO AL FILTER && order.date == date}.last()
                 if (order.size !== 0){
                     canOrder = order.last().menu.cantMaxPeerDay > order.last().cant() + cant
@@ -86,6 +85,16 @@ class Provider(
         return creditAccount
     }
 
+    fun closeOrders(aMenu: Menu) {
+        val quantityOfOrders = aMenu.orders.map { order -> order.cant() }.sum()
+
+        aMenu.orders.map { order -> order.close(quantityOfOrders) }
+    }
+
+    fun accountsStaiment(priceDiff: Double) {
+        creditAccount += priceDiff
+    }
+
     data class Builder(
             var name: String = "",
             var logo: String = "",
@@ -100,8 +109,7 @@ class Provider(
             //Distancia maxima entrega
             var distanceDelivery: Int = 0,
             var creditAccount : Double = 0.0,
-            var menues :MutableList<Menu> = mutableListOf(),
-            var orders: MutableList<Order> = mutableListOf()) {
+            var menues :MutableList<Menu> = mutableListOf()) {
 
         fun name(name: String) = apply { this.name = name }
         fun logo(logo: String) = apply { this.logo = logo }
@@ -113,9 +121,8 @@ class Provider(
         fun phone(phone: String) = apply { this.phone = phone }
         fun disponibility(disponibility: String) = apply { this.disponibility = disponibility }
         fun creditAccount(creditAccount: Double) = apply { this.creditAccount = creditAccount }
-        fun menues(menues: MutableList<Menu>) = apply { this.menues = menues }
-        fun orders(orders: MutableList<Order>) = apply { this.orders = orders }
-        fun build() = Provider(name, logo, location, address, description, webSite, mail, phone, disponibility, distanceDelivery, creditAccount ,menues, orders)
+
+        fun build() = Provider(name, logo, location, address, description, webSite, mail, phone, disponibility, distanceDelivery, creditAccount ,menues)
     }
 
 
