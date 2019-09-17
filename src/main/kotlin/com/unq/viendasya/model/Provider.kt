@@ -95,6 +95,10 @@ class Provider(
         creditAccount += priceDiff
     }
 
+    fun withdrawals(quantity: Double) {
+        creditAccount -= quantity
+    }
+
     data class Builder(
             var name: String = "",
             var logo: String = "",

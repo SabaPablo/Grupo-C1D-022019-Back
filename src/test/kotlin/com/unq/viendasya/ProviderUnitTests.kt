@@ -118,4 +118,14 @@ class ProviderUnitTests {
         provider.addMenu(menu)
         Assert.assertEquals(21, provider.menues.size )
     }
+
+    @Test
+    fun aProviderCanWithdrawMoneyFromYourAccount(){
+        val provider = Provider.Builder().build()
+        provider.creditAccount = 1000.00
+
+        provider.withdrawals(249.50)
+
+        Assert.assertEquals(750.50, provider.creditAccount, 0.01)
+    }
 }
