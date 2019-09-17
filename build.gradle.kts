@@ -24,10 +24,13 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("joda-time:joda-time:2.10.3")
-
+	implementation("com.sun.mail:android-mail:1.6.0")
+	implementation("com.sun.mail:android-activation:1.6.0")
 
 	implementation("io.springfox:springfox-swagger2:2.3.0")
 	implementation("io.springfox:springfox-swagger-ui:2.3.0")
+
+	implementation("org.springframework:spring-context-support")
 
 	/*
 	// Koin for Kotlin
