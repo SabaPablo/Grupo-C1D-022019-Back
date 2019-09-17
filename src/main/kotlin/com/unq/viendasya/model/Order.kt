@@ -14,10 +14,7 @@ class Order (
         var date: LocalDateTime,
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "client_id")
-        var client: Client,
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "provider_id")
-        var provider: Provider
+        var client: Client
 ) {
 
     @Id
@@ -25,13 +22,13 @@ class Order (
     var id: Int = 0
 
 
-    fun menuPrice(): Double {
+    fun menuPrice(totalNumbersOfOrders: Int): Double {
         var price = menu.price
 
-        if( cant >= menu.cantMax){
+        if( totalNumbersOfOrders >= menu.cantMax){
             price = menu.priceCantMax
         }else{
-            if(cant >= menu.cantMin){
+            if(totalNumbersOfOrders >= menu.cantMin){
                 price = menu.priceCantMin
             }
         }
@@ -42,9 +39,10 @@ class Order (
         return cant
     }
 
-    fun close(){
-        val priceDiff = this.cant * (menu.price - this.menuPrice())
-        this.client.chargeCredit(priceDiff)
+    fun close(totalNumbersOfOrders: Int){
+        val priceDiff = cant * (menu.price - this.menuPrice(totalNumbersOfOrders))
+        client.chargeCredit(priceDiff)
+        menu.provider.accountsStaiment(priceDiff)
         //this.client.sendMailsConfirmation()
     }
 
@@ -52,14 +50,12 @@ class Order (
             var menu: Menu,
             var cant: Int = 0,
             var date: LocalDateTime = LocalDateTime.now(),
-            var client: Client = Client.Builder().build(),
-            var provider: Provider = Provider.Builder().build()
+            var client: Client = Client.Builder().build()
     ) {
         fun menu(menu: Menu) = apply { this.menu = menu }
         fun cant(cant: Int) = apply { this.cant = cant }
         fun date(date: LocalDateTime) = apply { this.date = date}
         fun client(client: Client) = apply { this.client = client }
-        fun provider(provider: Provider) = apply { this.provider = provider }
-        fun build() = Order(menu, cant, date, client, provider)
+        fun build() = Order(menu, cant, date, client)
     }
 }
