@@ -23,8 +23,8 @@ class ClientController(@Autowired private val  clientRepository : ClientReposito
         return clientRepository.save(user)
     }
 
-    @GetMapping("/test")
-    fun test() : Int {
-        return 1
+    @GetMapping("/ping")
+    fun test() : String {
+        return "pong"
     }
 }

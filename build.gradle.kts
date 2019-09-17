@@ -26,8 +26,8 @@ dependencies {
 	implementation("joda-time:joda-time:2.10.3")
 
 
-	implementation("io.springfox:springfox-swagger2:2.3.0")
-	implementation("io.springfox:springfox-swagger-ui:2.3.0")
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
 	/*
 	// Koin for Kotlin
