@@ -37,4 +37,12 @@ class MenuUnitTests {
 
     }
 
+    @Test
+    fun menuRankingWithLessOf2PointsAndMoreOfTwentyCalificationIsCanceled(){
+        val menu = Menu.Builder().build()
+
+        for (x in 1..20) menu.addRanking(2)
+
+        Assert.assertEquals(menu.isCanceled)
+    }
 }

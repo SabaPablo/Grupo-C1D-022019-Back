@@ -66,6 +66,9 @@ class Menu (
         return rate.sum().toDouble().div(rate.size.toDouble())
     }
 
+    fun addRanking(value: Int) = apply {
+        rate.add(value)
+    }
 
 
     //val category: MutableList<ServiceCategory> = mutableListOf()
@@ -110,6 +113,7 @@ class Menu (
 
         fun build() = Menu(name, description, deliveryValue, rate, validity, expiration, turn,
                 deliveryTime, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
+
 
     }
 
