@@ -21,6 +21,7 @@ class Menu (
     //Turnos/Horarios de entrega/Envio
     var turn: String,
     var deliveryTime: String,
+    var status: MenuStatus,
     var price :Double,
     var cantMin : Int,
     var priceCantMin: Double,
@@ -108,8 +109,15 @@ class Menu (
         fun provider(provider: Provider) = apply { this.provider= provider}
 
 
-        fun build() = Menu(name, description, deliveryValue, rate, validity, expiration, turn,
-                deliveryTime, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
+        fun build() : Menu {
+            val status: MenuStatus = if(expiration.isBefore(LocalDate.now())){
+                MenuStatus.ACTIVE
+            } else {
+                MenuStatus.EXPIRE
+            }
+            return Menu(name, description, deliveryValue, rate ,validity, expiration, turn,
+                    deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
+        }
 
     }
 
