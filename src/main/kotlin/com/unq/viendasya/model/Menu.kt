@@ -1,5 +1,7 @@
 package com.unq.viendasya.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
+import org.hibernate.type.descriptor.java.DateTypeDescriptor
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import javax.persistence.*
@@ -12,7 +14,9 @@ class Menu (
     var deliveryValue: Double,
     @ElementCollection
     var rate: MutableList<Int>,
+    @JsonFormat(pattern = DateTypeDescriptor.DATE_FORMAT)
     var validity: LocalDate,
+    @JsonFormat(pattern = DateTypeDescriptor.DATE_FORMAT)
     var expiration: LocalDate,
     //Turnos/Horarios de entrega/Envio
     var turn: String,
