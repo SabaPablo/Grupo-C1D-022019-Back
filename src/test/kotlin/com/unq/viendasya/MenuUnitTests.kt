@@ -36,5 +36,9 @@ class MenuUnitTests {
         Assert.assertEquals(2.86, menu.ranking(), 0.01)
 
     }
+    @Test
+    fun AddedCategoryToMenuAndAskOne() {
+        val menu = Menu.Builder().build()
 
+    }
 }
