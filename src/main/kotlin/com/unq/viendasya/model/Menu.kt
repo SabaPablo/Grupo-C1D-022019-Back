@@ -12,6 +12,8 @@ class Menu (
     var name: String,
     var description: String,
     var deliveryValue: Double,
+    @ElementCollection
+    var rate: MutableList<Int>,
     @JsonFormat(pattern = DateTypeDescriptor.DATE_FORMAT)
     var validity: LocalDate,
     @JsonFormat(pattern = DateTypeDescriptor.DATE_FORMAT)
@@ -55,6 +57,16 @@ class Menu (
         orders.add(order)
     }
 
+    fun rate(value: Int) {
+        rate.add(value)
+        this.ranking()
+    }
+
+    fun ranking(): Double {
+        return rate.sum().toDouble().div(rate.size.toDouble())
+    }
+
+
 
     //val category: MutableList<ServiceCategory> = mutableListOf()
 
@@ -62,6 +74,7 @@ class Menu (
             var name: String = "",
             var description: String = "",
             var deliveryValue: Double = 0.0,
+            var rate: MutableList<Int> = mutableListOf(),
             var validity: LocalDate = LocalDate(),
             var expiration: LocalDate = LocalDate(),
             //Turnos/Horarios de entrega/Envio
@@ -95,7 +108,7 @@ class Menu (
         fun provider(provider: Provider) = apply { this.provider= provider}
 
 
-        fun build() = Menu(name, description, deliveryValue, validity, expiration, turn,
+        fun build() = Menu(name, description, deliveryValue, rate, validity, expiration, turn,
                 deliveryTime, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
 
     }
