@@ -2,6 +2,7 @@ package com.unq.viendasya
 
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
+import com.unq.viendasya.model.MenuStatus
 import com.unq.viendasya.model.Provider
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -36,6 +37,10 @@ class MenuUnitTests {
         Assert.assertEquals(2.86, menu.ranking(), 0.01)
 
     }
+    @Test
+    fun AddedCategoryToMenuAndAskOne() {
+        val menu = Menu.Builder().build()
+    }
 
     @Test
     fun menuRankingWithLessOf2PointsAndMoreOfTwentyCalificationIsCanceled(){
@@ -43,6 +48,7 @@ class MenuUnitTests {
 
         for (x in 1..20) menu.addRanking(2)
 
-        Assert.assertEquals(menu.isCanceled)
+        Assert.assertEquals(menu.status, MenuStatus.CANCELED)
+
     }
 }
