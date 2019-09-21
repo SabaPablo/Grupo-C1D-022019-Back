@@ -1,6 +1,7 @@
 package com.unq.viendasya.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.type.descriptor.java.DateTypeDescriptor
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -11,6 +12,7 @@ import javax.persistence.*
 class Menu (
     var name: String,
     var description: String,
+    var urlImage: String,
     var deliveryValue: Double,
     @ElementCollection
     var rate: MutableList<Int>,
@@ -30,6 +32,7 @@ class Menu (
     var cantMaxPeerDay: Int,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "provider_id", referencedColumnName = "id")
+    @JsonIgnore
     var provider: Provider) {
 
     @Id
@@ -77,6 +80,7 @@ class Menu (
     data class Builder(
             var name: String = "",
             var description: String = "",
+            var urlImage:String  = "",
             var deliveryValue: Double = 0.0,
             var rate: MutableList<Int> = mutableListOf(),
             var validity: LocalDate = LocalDate(),
@@ -98,6 +102,7 @@ class Menu (
         fun name(name: String) = apply { this.name = name }
         fun description(description: String) = apply { this.description= description}
         //fun category(category: ServiceCategory) = apply { this.category.add(category)}
+        fun urlImage(urlImage: String) = apply { this.urlImage= urlImage}
         fun deliveryValue(deliveryValue: Double) = apply { this.deliveryValue= deliveryValue}
         fun validity(validity: LocalDate) = apply { this.validity= validity}
         fun expiration(expiration: LocalDate) = apply { this.expiration= expiration}
@@ -118,7 +123,7 @@ class Menu (
             } else {
                 MenuStatus.EXPIRE
             }
-            return Menu(name, description, deliveryValue, rate ,validity, expiration, turn,
+            return Menu(name, description, urlImage, deliveryValue, rate ,validity, expiration, turn,
                     deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
         }
 
