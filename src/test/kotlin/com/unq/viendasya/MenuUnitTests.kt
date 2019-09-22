@@ -44,11 +44,12 @@ class MenuUnitTests {
 
     @Test
     fun menuRankingWithLessOf2PointsAndMoreOfTwentyCalificationIsCanceled(){
-        val menu = Menu.Builder().build()
+        val expirationDay = LocalDate.now().plusDays(3)
+        val menu = Menu.Builder().expiration(expirationDay).build()
 
-        for (x in 1..20) menu.addRanking(2)
-
-        Assert.assertEquals(menu.status, MenuStatus.CANCELED)
+        for (x in 0..19) menu.addRanking(2)
+        menu.addRanking(1)
+        Assert.assertEquals( MenuStatus.CANCELED, menu.status)
 
     }
 }

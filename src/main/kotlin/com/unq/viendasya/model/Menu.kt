@@ -67,15 +67,14 @@ class Menu (
     }
 
     fun ranking(): Double {
-        return rate.sum().toDouble().div(rate.size.toDouble())
+        return status.ranking(rate)
     }
 
     fun addRanking(value: Int) = apply {
         rate.add(value)
+        status = status.verify(rate)
     }
 
-
-    //val category: MutableList<ServiceCategory> = mutableListOf()
 
     data class Builder(
             var name: String = "",
@@ -118,7 +117,7 @@ class Menu (
 
 
         fun build() : Menu {
-            val status: MenuStatus = if(expiration.isBefore(LocalDate.now())){
+            val status: MenuStatus = if(expiration.isAfter(LocalDate.now())){
                 MenuStatus.ACTIVE
             } else {
                 MenuStatus.EXPIRE
