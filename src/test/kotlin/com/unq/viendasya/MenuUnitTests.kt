@@ -2,6 +2,7 @@ package com.unq.viendasya
 
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
+import com.unq.viendasya.model.MenuStatus
 import com.unq.viendasya.model.Provider
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -39,6 +40,16 @@ class MenuUnitTests {
     @Test
     fun AddedCategoryToMenuAndAskOne() {
         val menu = Menu.Builder().build()
+    }
+
+    @Test
+    fun menuRankingWithLessOf2PointsAndMoreOfTwentyCalificationIsCanceled(){
+        val expirationDay = LocalDate.now().plusDays(3)
+        val menu = Menu.Builder().expiration(expirationDay).build()
+
+        for (x in 0..19) menu.addRanking(2)
+        menu.addRanking(1)
+        Assert.assertEquals( MenuStatus.CANCELED, menu.status)
 
     }
 }
