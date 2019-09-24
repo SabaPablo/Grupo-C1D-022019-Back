@@ -72,7 +72,7 @@ class Menu (
 
     fun addRanking(value: Int) = apply {
         rate.add(value)
-        status = status.verify(rate)
+        status = status.verify(rate, provider)
     }
 
 
