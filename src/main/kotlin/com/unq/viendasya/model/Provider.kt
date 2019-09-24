@@ -22,7 +22,8 @@ class Provider(
     var distanceDelivery: Int,
     var creditAccount: Double,
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "provider")
-    var menues: MutableList<Menu>
+    var menues: MutableList<Menu>,
+    var status: ProviderStatus
     ) {
 
     @Id
@@ -99,6 +100,10 @@ class Provider(
         creditAccount -= quantity
     }
 
+    fun verifyStaus() {
+        status = status.verify(menues)
+    }
+
     data class Builder(
             var name: String = "",
             var logo: String = "",
@@ -126,7 +131,10 @@ class Provider(
         fun disponibility(disponibility: String) = apply { this.disponibility = disponibility }
         fun creditAccount(creditAccount: Double) = apply { this.creditAccount = creditAccount }
 
-        fun build() = Provider(name, logo, location, address, description, webSite, mail, phone, disponibility, distanceDelivery, creditAccount ,menues)
+        fun build(): Provider {
+            val status = ProviderStatus.ACTIVE
+            return Provider(name, logo, location, address, description, webSite, mail, phone, disponibility, distanceDelivery, creditAccount ,menues, status)
+        }
     }
 
 

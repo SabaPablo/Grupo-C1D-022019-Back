@@ -3,6 +3,7 @@ package com.unq.viendasya
 import com.unq.viendasya.exception.CurrencyMenuException
 import com.unq.viendasya.model.Menu
 import com.unq.viendasya.model.Provider
+import com.unq.viendasya.model.ProviderStatus
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.junit.Assert
@@ -127,5 +128,25 @@ class ProviderUnitTests {
         provider.withdrawals(249.50)
 
         Assert.assertEquals(750.50, provider.creditAccount, 0.01)
+    }
+
+    @Test
+    fun aProviderWithTwentyCanceledMenuesIsAlsoCanceled(){
+        val provider = Provider.Builder().build()
+
+        for (x in 0..8){
+            val menu = Menu.Builder().expiration(LocalDate().plusDays(3)).build()
+            for (y in 0..19) menu.addRanking(1)
+            provider.addMenu(menu)
+        }
+
+        val menu10 = Menu.Builder().expiration(LocalDate().plusDays(3)).build()
+        for (y in 0..18) menu10.addRanking(2)
+        provider.addMenu(menu10)
+
+        menu10.addRanking(1)
+
+        Assert.assertEquals(ProviderStatus.CANCELED, provider.status)
+
     }
 }
