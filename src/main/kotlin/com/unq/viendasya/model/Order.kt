@@ -1,7 +1,8 @@
 package com.unq.viendasya.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
+import org.hibernate.type.descriptor.java.DateTypeDescriptor.DATE_FORMAT
 import org.joda.time.LocalDateTime
-import org.joda.time.LocalTime
 import javax.persistence.*
 
 @Entity
@@ -11,6 +12,7 @@ class Order (
         @JoinColumn(name = "menu_id", referencedColumnName = "id")
         var menu: Menu,
         var cant: Int,
+        @JsonFormat(pattern = DATE_FORMAT)
         var date: LocalDateTime,
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "client_id")
@@ -20,6 +22,31 @@ class Order (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
+
+
+    fun menuPrice(totalNumbersOfOrders: Int): Double {
+        var price = menu.price
+
+        if( totalNumbersOfOrders >= menu.cantMax){
+            price = menu.priceCantMax
+        }else{
+            if(totalNumbersOfOrders >= menu.cantMin){
+                price = menu.priceCantMin
+            }
+        }
+       return price
+    }
+
+    fun cant(): Int{
+        return cant
+    }
+
+    fun close(totalNumbersOfOrders: Int){
+        val priceDiff = cant * (menu.price - this.menuPrice(totalNumbersOfOrders))
+        client.chargeCredit(priceDiff)
+        menu.provider.accountsStaiment(priceDiff)
+        //this.client.sendMailsConfirmation()
+    }
 
     data class Builder(
             var menu: Menu,
@@ -32,6 +59,5 @@ class Order (
         fun date(date: LocalDateTime) = apply { this.date = date}
         fun client(client: Client) = apply { this.client = client }
         fun build() = Order(menu, cant, date, client)
-
     }
 }
