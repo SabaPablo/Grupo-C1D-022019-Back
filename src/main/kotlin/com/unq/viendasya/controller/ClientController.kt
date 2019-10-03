@@ -1,7 +1,9 @@
 package com.unq.viendasya.controller
 
+import com.unq.viendasya.controller.apiModels.MiniClient
 import com.unq.viendasya.model.Client
-import com.unq.viendasya.repository.ClientRepository
+import com.unq.viendasya.service.ClientService
+import com.unq.viendasya.service.ClientServiceImple
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -10,17 +12,16 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-class ClientController(@Autowired private val  clientRepository : ClientRepository) {
-
+class ClientController(@Autowired val clientService: ClientService ) {
 
     @GetMapping("/clients")
     fun getClients(pageable : Pageable) : Page<Client> {
-        return clientRepository.findAll(pageable)
+        return clientService.findAll(pageable)
     }
 
     @PostMapping("/clients")
-    fun createClient(@Valid @RequestBody user : Client) : Client {
-        return clientRepository.save(user)
+    fun createClient(@Valid @RequestBody user : MiniClient) {
+        clientService.createClient(user)
     }
 
     @GetMapping("/ping")
