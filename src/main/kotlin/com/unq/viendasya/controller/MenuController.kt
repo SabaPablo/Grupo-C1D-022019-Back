@@ -14,12 +14,12 @@ class MenuController(@Autowired private val  menuService: MenuService) {
 
     @CrossOrigin
     @GetMapping("/menus")
-    fun getMenus() : MutableList<Menu> {
+    fun getMenus() : List<Menu> {
         return menuService.findAll()
     }
 
     @PostMapping("/menus")
-    fun createMenu(@Valid @RequestBody data : MiniMenu) : Menu {
+    fun createMenu(@Valid @RequestBody data : MiniMenu) : Menu? {
         return menuService.createMenu(data)
     }
 
