@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
 interface ClientService {
-    fun createClient(data: MiniClient)
+    fun createClient(data: MiniClient): Client
     fun findAll(pageable: Pageable): Page<Client>
+    fun findById(idClient: Int): Client?
 }
