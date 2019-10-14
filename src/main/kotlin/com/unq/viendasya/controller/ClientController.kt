@@ -18,12 +18,14 @@ class ClientController(@Autowired val clientService: ClientService ) {
         return clientService.findAll(pageable)
     }
 
-    @GetMapping("/clients")
+   /* @GetMapping("/clients")
     fun getClient(@Valid @RequestParam (value = "id") id:Int): Client? {
         return clientService.findById(id)
     }
 
-    @PostMapping("/clients")
+    */
+   @CrossOrigin
+   @PostMapping("/clients")
     fun createClient(@Valid @RequestBody user : MiniClient): Client {
         return clientService.createClient(user)
     }
