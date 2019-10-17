@@ -19,7 +19,8 @@ class Client(
         var location: String,
         var creditAccount: Double,
         @Transient
-        var holidaysAPI: RestHolidaysAPI) {
+        var holidaysAPI: RestHolidaysAPI,
+        val password: String) {
 
 
 
@@ -82,15 +83,17 @@ class Client(
             var phone: String = "",
             var location: String = "",
             var holidaysAPI: RestHolidaysAPI = RestHolidaysAPIImple(),
-            var creditAccount: Double = 0.0) {
+            var creditAccount: Double = 0.0,
+            var password: String = "") {
 
         fun name(name: String) = apply { this.name = name }
         fun email(email: String) = apply { this.email = email }
         fun phone(phone: String) = apply { this.phone = phone }
+        fun password(password: String) = apply { this.password = password }
         fun location(location: String) = apply { this.location = location }
         fun holidaysAPI(holidaysAPI: RestHolidaysAPI) = apply { this.holidaysAPI = holidaysAPI }
         fun creditAccount(creditAccount: Double) = apply { this.creditAccount = creditAccount }
-        fun build() = Client(name, email, phone, location, creditAccount, holidaysAPI)
+        fun build() = Client(name, email, phone, location, creditAccount, holidaysAPI, password)
 
     }
 }
