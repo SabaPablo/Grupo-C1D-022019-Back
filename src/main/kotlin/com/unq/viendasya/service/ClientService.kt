@@ -9,4 +9,5 @@ interface ClientService {
     fun createClient(data: MiniClient): Client
     fun findAll(pageable: Pageable): Page<Client>
     fun findById(idClient: Int): Client?
+    fun findByMail(mail: String): Client?
 }

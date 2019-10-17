@@ -19,6 +19,8 @@ class ClientController(@Autowired val clientService: ClientService ) {
     }
 
    /* @GetMapping("/clients")
+/*
+    @GetMapping("/clients")
     fun getClient(@Valid @RequestParam (value = "id") id:Int): Client? {
         return clientService.findById(id)
     }
@@ -26,6 +28,9 @@ class ClientController(@Autowired val clientService: ClientService ) {
     */
    @CrossOrigin
    @PostMapping("/clients")
+ */
+
+    @PostMapping("/clients")
     fun createClient(@Valid @RequestBody user : MiniClient): Client {
         return clientService.createClient(user)
     }
