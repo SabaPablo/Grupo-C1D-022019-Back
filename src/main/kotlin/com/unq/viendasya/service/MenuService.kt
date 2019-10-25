@@ -7,4 +7,5 @@ interface MenuService {
     fun createMenu(menu: MiniMenu) : Menu?
     fun findById(idMenu: Int): Menu?
     fun findAll(): List<Menu>
+    fun findByQuery(query: String): List<Menu>
 }

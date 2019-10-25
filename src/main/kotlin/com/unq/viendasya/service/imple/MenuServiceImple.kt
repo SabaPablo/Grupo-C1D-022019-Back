@@ -33,6 +33,9 @@ class MenuServiceImple(@Autowired private val  dao: MenuRepository) : MenuServic
     override fun findAll(): List<Menu> {
         return dao.findAll()
     }
+    override fun findByQuery(query: String): List<Menu> {
+        return dao.findByQuery("%${query.toUpperCase()}%")
+    }
 
     override fun findById(idMenu: Int): Menu? {
         return dao.findByIdOrNull(idMenu)
