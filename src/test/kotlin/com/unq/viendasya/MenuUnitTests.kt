@@ -1,11 +1,8 @@
 package com.unq.viendasya
 
-import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
 import com.unq.viendasya.model.MenuStatus
-import com.unq.viendasya.model.Provider
 import org.joda.time.LocalDate
-import org.joda.time.LocalDateTime
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

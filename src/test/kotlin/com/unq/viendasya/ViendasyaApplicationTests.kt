@@ -1,10 +1,8 @@
 package com.unq.viendasya
 
-import com.unq.viendasya.model.Client
+import com.unq.viendasya.model.User
 import com.unq.viendasya.model.Menu
 import com.unq.viendasya.model.Order
-import com.unq.viendasya.model.Provider
-import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.junit.Assert
 import org.junit.Test
@@ -54,11 +52,11 @@ class ViendasyaApplicationTests {
                 .cantMaxPeerDay(10)
                 .build()
 
-        val client = Client.Builder().creditAccount(350.0).build()
+        val client = User.Builder().creditAccount(350.0).build()
 
         val today = LocalDateTime.now()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         val cantOrders = 3
 
@@ -75,9 +73,9 @@ class ViendasyaApplicationTests {
     @Test
     fun whenCloseAnOrdenTheProviderChargeAllCoustomerOrders(){
         val today = LocalDateTime.now()
-        val anyClient = Client.Builder().build()
-        val otherClient = Client.Builder().build()
-        val provider = Provider.Builder().build()
+        val anyClient = User.Builder().build()
+        val otherClient = User.Builder().build()
+        val provider = User.Builder().build()
         val menu = Menu.Builder()
                 .cantMaxPeerDay(10)
                 .price(250.0)

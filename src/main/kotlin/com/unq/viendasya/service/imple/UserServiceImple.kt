@@ -1,9 +1,9 @@
 package com.unq.viendasya.service.imple
 
 import com.unq.viendasya.controller.apiModels.MiniClient
-import com.unq.viendasya.model.Client
-import com.unq.viendasya.repository.ClientRepository
-import com.unq.viendasya.service.ClientService
+import com.unq.viendasya.model.User
+import com.unq.viendasya.repository.UserRepository
+import com.unq.viendasya.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service
 
 @Service
 
-class ClientServiceImple(@Autowired val dao: ClientRepository): ClientService {
-    override fun findByMail(mail: String): Client? {
+class UserServiceImple(@Autowired val dao: UserRepository): UserService {
+    override fun findByMail(mail: String): User? {
         return dao.findByEmail(mail)
     }
 
-    override fun findById(idClient: Int): Client? {
+    override fun findById(idClient: Int): User? {
         return dao.findByIdOrNull(idClient)
     }
 
-    override fun createClient(data: MiniClient): Client {
-        val client = Client.Builder().name("${data.name} ${data.lastName}" )
+    override fun createClient(data: MiniClient): User {
+        val client = User.Builder().name("${data.name} ${data.lastName}" )
                 .password(BCryptPasswordEncoder().encode(data.password))
                 .location("${data.address}, ${data.city}, ${data.country}")
                 .phone(data.phone)
@@ -32,7 +32,7 @@ class ClientServiceImple(@Autowired val dao: ClientRepository): ClientService {
         return dao.save(client)
     }
 
-    override fun findAll(pageable: Pageable): Page<Client> {
+    override fun findAll(pageable: Pageable): Page<User> {
         return dao.findAll(pageable)
     }
 }

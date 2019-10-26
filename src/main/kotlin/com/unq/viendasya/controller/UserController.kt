@@ -1,8 +1,8 @@
 package com.unq.viendasya.controller
 
 import com.unq.viendasya.controller.apiModels.MiniClient
-import com.unq.viendasya.model.Client
-import com.unq.viendasya.service.ClientService
+import com.unq.viendasya.model.User
+import com.unq.viendasya.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -11,17 +11,17 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-class ClientController(@Autowired val clientService: ClientService ) {
+class UserController(@Autowired val clientService: UserService ) {
 
     @GetMapping("/clients")
-    fun getClients(pageable: Pageable): Page<Client> {
+    fun getClients(pageable: Pageable): Page<User> {
         return clientService.findAll(pageable)
     }
 
    /* @GetMapping("/clients")
 /*
     @GetMapping("/clients")
-    fun getClient(@Valid @RequestParam (value = "id") id:Int): Client? {
+    fun getClient(@Valid @RequestParam (value = "id") id:Int): User? {
         return clientService.findById(id)
     }
 
@@ -32,7 +32,7 @@ class ClientController(@Autowired val clientService: ClientService ) {
 
     @CrossOrigin
     @PostMapping("/clients")
-    fun createClient(@Valid @RequestBody user : MiniClient): Client {
+    fun createClient(@Valid @RequestBody user : MiniClient): User {
         return clientService.createClient(user)
     }
 
