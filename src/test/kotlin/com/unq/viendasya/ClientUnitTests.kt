@@ -6,7 +6,6 @@ import com.unq.viendasya.exception.MaxCantPeerDayException
 import com.unq.viendasya.exception.OrderInHolidayException
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
-import com.unq.viendasya.model.Provider
 import com.unq.viendasya.service.imple.HolidayApiFakeAllHoliday
 import com.unq.viendasya.service.imple.HolidayApiFakeAllNonHoliday
 import org.joda.time.LocalDate
@@ -40,7 +39,7 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
         client.createOrder(provider,menu,10, LocalDateTime.now().plusDays(3))
         Assert.assertEquals(client.orders.size, 1)
     }
@@ -57,7 +56,7 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.createOrder(provider, menu,51, LocalDateTime.now().plusHours(96))
     }
@@ -76,7 +75,7 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.createOrder(provider, menu,10,LocalDateTime.now())
 
@@ -104,7 +103,7 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.createOrder(provider, menu,10,LocalDateTime.now())
 
@@ -133,7 +132,7 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.createOrder(provider, menu,30,LocalDateTime.now().plusDays(4))
 
@@ -151,7 +150,7 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.createOrder(provider, menu,3,LocalDateTime.now())
     }
@@ -162,7 +161,7 @@ class ClientUnitTests {
                 .holidaysAPI(HolidayApiFakeAllNonHoliday()).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.chargeCredit(500.0)
         client.createOrder(provider, menu,1, LocalDateTime.now().plusDays(3))
@@ -178,7 +177,7 @@ class ClientUnitTests {
                 .creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.chargeCredit(500.0)
         client.createOrder(provider, menu,2, LocalDateTime.now().plusDays(3))
@@ -194,7 +193,7 @@ class ClientUnitTests {
                 .creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         client.chargeCredit(100.0)
         client.createOrder(provider, menu,2, LocalDateTime.now().plusDays(3))
@@ -213,7 +212,7 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
         client.createOrder(provider,menu,10, LocalDateTime.now().plusDays(3))
         Assert.assertEquals(client.orders.size, 1)
     }

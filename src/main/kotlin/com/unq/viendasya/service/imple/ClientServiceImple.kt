@@ -23,8 +23,10 @@ class ClientServiceImple(@Autowired val dao: ClientRepository): ClientService {
     }
 
     override fun createClient(data: MiniClient): Client {
-        val client = Client.Builder().name(data.name)
+        val client = Client.Builder().name("${data.name} ${data.lastName}" )
                 .password(BCryptPasswordEncoder().encode(data.password))
+                .location("${data.address}, ${data.city}, ${data.country}")
+                .phone(data.phone)
                            .email(data.mail)
                            .build()
         return dao.save(client)
