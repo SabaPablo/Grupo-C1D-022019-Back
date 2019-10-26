@@ -22,6 +22,11 @@ class MenuController(@Autowired private val  menuService: MenuService) {
     fun getMenusbyQuery(@RequestParam(value = "query", defaultValue = "") query: String) : List<Menu> {
         return menuService.findByQuery(query)
     }
+    @CrossOrigin
+    @GetMapping("/menus/provider")
+    fun getMenusbyQueryAndProviderId(@RequestParam(value = "providerId", defaultValue = "0") providerId: Int) : List<Menu> {
+        return menuService.findByProviderId(providerId)
+    }
 
     @PostMapping("/menus")
     fun createMenu(@Valid @RequestBody data : MiniMenu) : Menu? {

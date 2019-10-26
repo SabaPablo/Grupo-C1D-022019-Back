@@ -41,4 +41,7 @@ class MenuServiceImple(@Autowired private val  dao: MenuRepository) : MenuServic
         return dao.findByIdOrNull(idMenu)
     }
 
+    override fun findByProviderId(providerId: Int): List<Menu> {
+        return dao.findByProviderId(providerId)
+    }
 }

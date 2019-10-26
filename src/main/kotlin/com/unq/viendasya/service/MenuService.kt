@@ -8,4 +8,5 @@ interface MenuService {
     fun findById(idMenu: Int): Menu?
     fun findAll(): List<Menu>
     fun findByQuery(query: String): List<Menu>
+    fun findByProviderId(providerId: Int): List<Menu>
 }
