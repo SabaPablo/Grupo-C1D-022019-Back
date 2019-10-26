@@ -7,8 +7,8 @@ import com.unq.viendasya.exception.OrderInHolidayException
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
 import com.unq.viendasya.model.Provider
-import com.unq.viendasya.service.HolidayApiFakeAllHoliday
-import com.unq.viendasya.service.HolidayApiFakeAllNonHoliday
+import com.unq.viendasya.service.imple.HolidayApiFakeAllHoliday
+import com.unq.viendasya.service.imple.HolidayApiFakeAllNonHoliday
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.junit.Assert

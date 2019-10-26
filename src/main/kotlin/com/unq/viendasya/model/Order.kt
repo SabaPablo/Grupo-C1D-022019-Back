@@ -49,7 +49,7 @@ class Order (
     }
 
     data class Builder(
-            var menu: Menu,
+            var menu: Menu = Menu.Builder().build(),
             var cant: Int = 0,
             var date: LocalDateTime = LocalDateTime.now(),
             var client: Client = Client.Builder().build()
