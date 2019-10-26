@@ -3,7 +3,7 @@ package com.unq.viendasya.service.imple
 import com.unq.viendasya.controller.apiModels.MiniOrder
 import com.unq.viendasya.model.Order
 import com.unq.viendasya.repository.OrderRepository
-import com.unq.viendasya.service.ClientService
+import com.unq.viendasya.service.UserService
 import com.unq.viendasya.service.MenuService
 import com.unq.viendasya.service.OrderService
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 @Service
 
 class OrderServiceImple(@Autowired val dao: OrderRepository,
-                        @Autowired val clientService: ClientService,
+                        @Autowired val clientService: UserService,
                         @Autowired val menuService: MenuService): OrderService {
 
 

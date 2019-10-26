@@ -16,7 +16,7 @@ class Order (
         var date: LocalDateTime,
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "client_id")
-        var client: Client
+        var client: User
 ) {
 
     @Id
@@ -52,12 +52,12 @@ class Order (
             var menu: Menu = Menu.Builder().build(),
             var cant: Int = 0,
             var date: LocalDateTime = LocalDateTime.now(),
-            var client: Client = Client.Builder().build()
+            var client: User = User.Builder().build()
     ) {
         fun menu(menu: Menu) = apply { this.menu = menu }
         fun cant(cant: Int) = apply { this.cant = cant }
         fun date(date: LocalDateTime) = apply { this.date = date}
-        fun client(client: Client) = apply { this.client = client }
+        fun client(client: User) = apply { this.client = client }
         fun build() = Order(menu, cant, date, client)
     }
 }
