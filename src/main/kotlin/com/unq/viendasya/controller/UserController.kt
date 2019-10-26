@@ -17,12 +17,17 @@ class UserController(@Autowired val clientService: UserService ) {
     fun getClients(pageable: Pageable): Page<User> {
         return clientService.findAll(pageable)
     }
+
+   /* @GetMapping("/clients")
 /*
     @GetMapping("/clients")
     fun getClient(@Valid @RequestParam (value = "id") id:Int): User? {
         return clientService.findById(id)
     }
 
+    */
+   @CrossOrigin
+   @PostMapping("/clients")
  */
 
     @CrossOrigin
