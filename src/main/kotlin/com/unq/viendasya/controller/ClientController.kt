@@ -14,7 +14,7 @@ import javax.validation.Valid
 class ClientController(@Autowired val clientService: ClientService ) {
 
     @GetMapping("/clients")
-    fun getClients(pageable : Pageable) : Page<Client> {
+    fun getClients(pageable: Pageable): Page<Client> {
         return clientService.findAll(pageable)
     }
 
@@ -30,6 +30,7 @@ class ClientController(@Autowired val clientService: ClientService ) {
    @PostMapping("/clients")
  */
 
+    @CrossOrigin
     @PostMapping("/clients")
     fun createClient(@Valid @RequestBody user : MiniClient): Client {
         return clientService.createClient(user)
