@@ -1,7 +1,7 @@
 package com.unq.viendasya
 
 import com.unq.viendasya.exception.CurrencyMenuException
-import com.unq.viendasya.model.Client
+import com.unq.viendasya.model.User
 import com.unq.viendasya.model.Menu
 import com.unq.viendasya.model.ProviderStatus
 import org.joda.time.LocalDate
@@ -17,14 +17,14 @@ class ProviderUnitTests {
 
     @Test
     fun createAProviderAndGetHisName() {
-        val provider = Client.Builder().name("Pizzarro").build()
+        val provider = User.Builder().name("Pizzarro").build()
         assert(provider.name == "Pizzarro")
         assert(provider.menues.isEmpty())
     }
 
     @Test
     fun createAProviderAndAddedAMenu() {
-        val provider = Client
+        val provider = User
                 .Builder()
                 .name("Pizzarro")
                 .address("Calle Falsa 123")
@@ -45,7 +45,7 @@ class ProviderUnitTests {
     }
     @Test
     fun createAProviderAndAddedTwoMenu() {
-        val provider = Client.Builder().name("Pizzarro")
+        val provider = User.Builder().name("Pizzarro")
                 .address("Calle Falsa 123")
                 .description("Pizzeria con las mejores pizzas")
                 .disponibility("L a V 4 a 18")
@@ -70,7 +70,7 @@ class ProviderUnitTests {
     }
     @Test(expected = CurrencyMenuException::class)
     fun aProviderCantGetMoreTwentyMenuesCurrent() {
-        val provider = Client.Builder().name("Pizzarro")
+        val provider = User.Builder().name("Pizzarro")
                 .address("Calle Falsa 123")
                 .description("Pizzeria con las mejores pizzas")
                 .disponibility("L a V 4 a 18")
@@ -95,7 +95,7 @@ class ProviderUnitTests {
     }
     @Test
     fun aProviderCantGetMoreTwentyMenuesNotCurrent() {
-        val provider = Client.Builder().name("Pizzarro")
+        val provider = User.Builder().name("Pizzarro")
                 .address("Calle Falsa 123")
                 .description("Pizzeria con las mejores pizzas")
                 .disponibility("L a V 4 a 18")
@@ -121,7 +121,7 @@ class ProviderUnitTests {
 
     @Test
     fun aProviderCanWithdrawMoneyFromYourAccount(){
-        val provider = Client.Builder().build()
+        val provider = User.Builder().build()
         provider.creditAccount = 1000.00
 
         provider.withdrawals(249.50)
@@ -131,7 +131,7 @@ class ProviderUnitTests {
 
     @Test
     fun aProviderWithTwentyCanceledMenuesIsAlsoCanceled(){
-        val provider = Client.Builder().build()
+        val provider = User.Builder().build()
 
         for (x in 0..8){
             val menu = Menu.Builder().expiration(LocalDate().plusDays(3)).build()

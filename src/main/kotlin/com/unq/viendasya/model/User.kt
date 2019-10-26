@@ -10,7 +10,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
-class Client(
+class User(
         var name: String,
         var logo: String,
         var email: String,
@@ -42,7 +42,7 @@ class Client(
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
     val orders: MutableSet<Order> = mutableSetOf()
 
-    fun createOrder(provider: Client, menu: Menu, cant : Int, date: LocalDateTime) {
+    fun createOrder(provider: User, menu: Menu, cant : Int, date: LocalDateTime) {
         when{
             onTimeForOffer(date).not() -> throw AheadOfTimeException("No se puede contratar servicio antes de las 48 hs")
             provider.canOrderByCant(menu, cant, date).not() -> throw MaxCantPeerDayException("El menu alcanzo el limite de contrataciones por dia")
@@ -192,7 +192,7 @@ class Client(
 
         fun holidaysAPI(holidaysAPI: RestHolidaysAPI) = apply { this.holidaysAPI = holidaysAPI }
         fun creditAccount(creditAccount: Double) = apply { this.creditAccount = creditAccount }
-        fun build() = Client(name,logo, email, phone,webSite,description, location, creditAccount,disponibility,distanceDelivery,status,menues, holidaysAPI, password)
+        fun build() = User(name,logo, email, phone,webSite,description, location, creditAccount,disponibility,distanceDelivery,status,menues, holidaysAPI, password)
 
     }
 }
