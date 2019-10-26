@@ -3,8 +3,6 @@ package com.unq.viendasya
 import com.unq.viendasya.model.Client
 import com.unq.viendasya.model.Menu
 import com.unq.viendasya.model.Order
-import com.unq.viendasya.model.Provider
-import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.junit.Assert
 import org.junit.Test
@@ -58,7 +56,7 @@ class ViendasyaApplicationTests {
 
         val today = LocalDateTime.now()
 
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
 
         val cantOrders = 3
 
@@ -77,7 +75,7 @@ class ViendasyaApplicationTests {
         val today = LocalDateTime.now()
         val anyClient = Client.Builder().build()
         val otherClient = Client.Builder().build()
-        val provider = Provider.Builder().build()
+        val provider = Client.Builder().build()
         val menu = Menu.Builder()
                 .cantMaxPeerDay(10)
                 .price(250.0)
