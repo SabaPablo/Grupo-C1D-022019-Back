@@ -1,5 +1,6 @@
 package com.unq.viendasya.service.imple
 
+import com.unq.viendasya.controller.apiModels.CreditRes
 import com.unq.viendasya.controller.apiModels.MiniClient
 import com.unq.viendasya.model.User
 import com.unq.viendasya.repository.UserRepository
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service
 @Service
 
 class UserServiceImple(@Autowired val dao: UserRepository): UserService {
+
     override fun findByMail(mail: String): User? {
         return dao.findByEmail(mail)
     }
@@ -35,4 +37,23 @@ class UserServiceImple(@Autowired val dao: UserRepository): UserService {
     override fun findAll(pageable: Pageable): Page<User> {
         return dao.findAll(pageable)
     }
+
+    override fun addCreditById(userId: Int, amount: Double): CreditRes {
+        val user = findById(userId)
+        val res = CreditRes(0,0.0)
+        user?.let{
+            it.chargeCredit(amount)
+            dao.save(it)
+            res.user_id = it.id
+            res.amount = it.creditAccount
+        }
+        return res
+    }
+
+    override fun getAmountByUserId(userId: Int): Double {
+        val user = findById(userId)
+        return user?.creditAccount ?: 0.0
+    }
+
+
 }
