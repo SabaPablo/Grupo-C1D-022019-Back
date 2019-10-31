@@ -2,6 +2,8 @@ package com.unq.viendasya.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.unq.viendasya.controller.MenuController
+import com.unq.viendasya.controller.UserController
 import org.hibernate.type.descriptor.java.DateTypeDescriptor
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -125,7 +127,6 @@ class Menu (
             return Menu(name, description, urlImage, deliveryValue, rate ,validity, expiration, turn,
                     deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
         }
-
 
     }
 

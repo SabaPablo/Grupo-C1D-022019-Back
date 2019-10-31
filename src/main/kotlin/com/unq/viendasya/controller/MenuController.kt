@@ -28,6 +28,7 @@ class MenuController(@Autowired private val  menuService: MenuService) {
         return menuService.findByProviderId(providerId)
     }
 
+    @CrossOrigin
     @PostMapping("/menus")
     fun createMenu(@Valid @RequestBody data : MiniMenu) : Menu? {
         return menuService.createMenu(data)
