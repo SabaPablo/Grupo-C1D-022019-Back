@@ -1,5 +1,6 @@
 package com.unq.viendasya.controller
 
+import com.unq.viendasya.controller.apiModels.CreditRes
 import com.unq.viendasya.controller.apiModels.MiniClient
 import com.unq.viendasya.model.User
 import com.unq.viendasya.service.UserService
@@ -18,22 +19,26 @@ class UserController(@Autowired val clientService: UserService ) {
         return clientService.findAll(pageable)
     }
 
-   /* @GetMapping("/clients")
-/*
-    @GetMapping("/clients")
-    fun getClient(@Valid @RequestParam (value = "id") id:Int): User? {
-        return clientService.findById(id)
-    }
-
-    */
-   @CrossOrigin
-   @PostMapping("/clients")
- */
-
     @CrossOrigin
     @PostMapping("/clients")
     fun createClient(@Valid @RequestBody user : MiniClient): User {
         return clientService.createClient(user)
     }
+
+
+
+    @CrossOrigin
+    @PostMapping("/credit")
+    fun createClient(@Valid @RequestBody credit : CreditRes): CreditRes {
+        return clientService.addCreditById(credit.user_id, credit.amount)
+    }
+
+    @CrossOrigin
+    @GetMapping("/credit")
+    fun getAmountByUserId(@RequestParam(value = "user_id", defaultValue = "0") userId: Int) : Double {
+        return clientService.getAmountByUserId(userId)
+    }
+
+
 
 }
