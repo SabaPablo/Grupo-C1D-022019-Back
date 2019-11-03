@@ -1,28 +1,37 @@
 package com.unq.viendasya.controller
 
-import com.unq.viendasya.model.Client
+import com.unq.viendasya.controller.apiModels.MiniMenu
 import com.unq.viendasya.model.Menu
-import com.unq.viendasya.repository.ClientRepository
-import com.unq.viendasya.repository.MenuRepository
+import com.unq.viendasya.service.MenuService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-class MenuController(@Autowired private val  menuRepository : MenuRepository) {
+class MenuController(@Autowired private val  menuService: MenuService) {
 
     @CrossOrigin
     @GetMapping("/menus")
-    fun getMenus() : MutableList<Menu> {
-        return menuRepository.findAll()
+    fun getMenus() : List<Menu> {
+        return menuService.findAll()
     }
 
+    @CrossOrigin
+    @GetMapping("/menus/query")
+    fun getMenusbyQuery(@RequestParam(value = "query", defaultValue = "") query: String) : List<Menu> {
+        return menuService.findByQuery(query)
+    }
+    @CrossOrigin
+    @GetMapping("/menus/provider")
+    fun getMenusbyQueryAndProviderId(@RequestParam(value = "providerId", defaultValue = "0") providerId: Int) : List<Menu> {
+        return menuService.findByProviderId(providerId)
+    }
+
+    @CrossOrigin
     @PostMapping("/menus")
-    fun createClient(@Valid @RequestBody menu : Menu) : Menu {
-        return menuRepository.save(menu)
+    fun createMenu(@Valid @RequestBody data : MiniMenu) : Menu? {
+        return menuService.createMenu(data)
     }
 
 }

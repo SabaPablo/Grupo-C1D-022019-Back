@@ -4,11 +4,10 @@ import com.unq.viendasya.exception.AheadOfTimeException
 import com.unq.viendasya.exception.InsufficientCreditException
 import com.unq.viendasya.exception.MaxCantPeerDayException
 import com.unq.viendasya.exception.OrderInHolidayException
-import com.unq.viendasya.model.Client
+import com.unq.viendasya.model.User
 import com.unq.viendasya.model.Menu
-import com.unq.viendasya.model.Provider
-import com.unq.viendasya.service.HolidayApiFakeAllHoliday
-import com.unq.viendasya.service.HolidayApiFakeAllNonHoliday
+import com.unq.viendasya.service.imple.HolidayApiFakeAllHoliday
+import com.unq.viendasya.service.imple.HolidayApiFakeAllNonHoliday
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.junit.Assert
@@ -23,7 +22,7 @@ class ClientUnitTests {
 
     @Test
     fun createAClientAndGetHisName() {
-        val client = Client.Builder().holidaysAPI(HolidayApiFakeAllNonHoliday()).name("zaraza")
+        val client = User.Builder().holidaysAPI(HolidayApiFakeAllNonHoliday()).name("zaraza")
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
         assert(client.name == "zaraza")
@@ -31,7 +30,7 @@ class ClientUnitTests {
 
     @Test
     fun createAClientAndBuildAMenu() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
@@ -40,14 +39,14 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
         client.createOrder(provider,menu,10, LocalDateTime.now().plusDays(3))
         Assert.assertEquals(client.orders.size, 1)
     }
 
     @Test(expected = MaxCantPeerDayException::class)
     fun createAClientAndBuildAMenuAndPassTheMaxCantPeerDay() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
@@ -57,18 +56,18 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.createOrder(provider, menu,51, LocalDateTime.now().plusHours(96))
     }
 
     fun notPassTheMaxCantPeerDayForTwoClients() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .email("zaraza@mail.com")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .phone("3344-4332").build()
 
-        val client2 = Client.Builder().name("zaraza2")
+        val client2 = User.Builder().name("zaraza2")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza2@mail.com").build()
 
@@ -76,7 +75,7 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.createOrder(provider, menu,10,LocalDateTime.now())
 
@@ -88,23 +87,23 @@ class ClientUnitTests {
     }
 
     fun notPassTheMaxCantPeerDayForThreeClientsDaysDifferent() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
 
-        val client2 = Client.Builder().name("zaraza2")
+        val client2 = User.Builder().name("zaraza2")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza2@mail.com").build()
 
-        val client3 = Client.Builder().name("zaraza2")
+        val client3 = User.Builder().name("zaraza2")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza2@mail.com").build()
         val menu: Menu = Menu.Builder().name("menu 1")
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.createOrder(provider, menu,10,LocalDateTime.now())
 
@@ -120,12 +119,12 @@ class ClientUnitTests {
 
     @Test(expected = MaxCantPeerDayException::class)
     fun passTheMaxCantPeerDayForTwoClients() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
 
-        val client2 = Client.Builder().name("zaraza2")
+        val client2 = User.Builder().name("zaraza2")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza2@mail.com").build()
 
@@ -133,7 +132,7 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.createOrder(provider, menu,30,LocalDateTime.now().plusDays(4))
 
@@ -142,7 +141,7 @@ class ClientUnitTests {
 
     @Test(expected = AheadOfTimeException::class)
     fun rejectOrderBecauseItIsAfter48hours() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
@@ -151,18 +150,18 @@ class ClientUnitTests {
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.createOrder(provider, menu,3,LocalDateTime.now())
     }
 
     @Test
     fun clientCanChargeCreditInYourAccount(){
-        val client = Client.Builder().creditAccount(100.0)
+        val client = User.Builder().creditAccount(100.0)
                 .holidaysAPI(HolidayApiFakeAllNonHoliday()).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.chargeCredit(500.0)
         client.createOrder(provider, menu,1, LocalDateTime.now().plusDays(3))
@@ -173,12 +172,12 @@ class ClientUnitTests {
 
     @Test
     fun clientCanPurchase2Menues(){
-        val client = Client.Builder()
+        val client = User.Builder()
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.chargeCredit(500.0)
         client.createOrder(provider, menu,2, LocalDateTime.now().plusDays(3))
@@ -189,12 +188,12 @@ class ClientUnitTests {
 
     @Test(expected = InsufficientCreditException::class)
     fun clientCantPurchaseAMenue(){
-        val client = Client.Builder()
+        val client = User.Builder()
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .creditAccount(100.0).build()
         val menu = Menu.Builder().price(200.0).cantMin(5).cantMaxPeerDay(10).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
 
         client.chargeCredit(100.0)
         client.createOrder(provider, menu,2, LocalDateTime.now().plusDays(3))
@@ -204,7 +203,7 @@ class ClientUnitTests {
 
     @Test(expected = OrderInHolidayException::class)
     fun clientCantBuildAMenuBecauseIsHoliday() {
-        val client = Client.Builder().name("zaraza")
+        val client = User.Builder().name("zaraza")
                 .holidaysAPI(HolidayApiFakeAllHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
@@ -213,7 +212,7 @@ class ClientUnitTests {
                 .cantMin(5).cantMax(30).cantMaxPeerDay(50)
                 .priceCantMin(210.0).expiration(LocalDate()).priceCantMax(190.0).build()
 
-        val provider = Provider.Builder().build()
+        val provider = User.Builder().build()
         client.createOrder(provider,menu,10, LocalDateTime.now().plusDays(3))
         Assert.assertEquals(client.orders.size, 1)
     }

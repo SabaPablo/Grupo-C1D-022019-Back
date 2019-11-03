@@ -2,6 +2,8 @@ package com.unq.viendasya.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.unq.viendasya.controller.MenuController
+import com.unq.viendasya.controller.UserController
 import org.hibernate.type.descriptor.java.DateTypeDescriptor
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -33,7 +35,7 @@ class Menu (
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "provider_id", referencedColumnName = "id")
     @JsonIgnore
-    var provider: Provider) {
+    var provider: User) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -93,7 +95,7 @@ class Menu (
             var cantMax : Int = 0,
             var priceCantMax: Double = 0.0,
             var cantMaxPeerDay: Int = 0,
-            var provider: Provider = Provider.Builder().build()
+            var provider: User = User.Builder().build()
     ){
 
         //val category: MutableList<ServiceCategory> = mutableListOf()
@@ -113,7 +115,7 @@ class Menu (
         fun cantMax(cantMax: Int) = apply { this.cantMax= cantMax}
         fun priceCantMax(priceCantMax: Double) = apply { this.priceCantMax= priceCantMax}
         fun cantMaxPeerDay(cantMaxPeerDay: Int) = apply { this.cantMaxPeerDay= cantMaxPeerDay}
-        fun provider(provider: Provider) = apply { this.provider= provider}
+        fun provider(provider: User) = apply { this.provider= provider}
 
 
         fun build() : Menu {
@@ -125,7 +127,6 @@ class Menu (
             return Menu(name, description, urlImage, deliveryValue, rate ,validity, expiration, turn,
                     deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
         }
-
 
     }
 

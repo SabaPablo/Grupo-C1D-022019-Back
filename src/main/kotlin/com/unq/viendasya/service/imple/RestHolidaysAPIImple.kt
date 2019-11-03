@@ -1,6 +1,7 @@
-package com.unq.viendasya.service
+package com.unq.viendasya.service.imple
 
 import com.unq.viendasya.model.Holidays
+import com.unq.viendasya.service.RestHolidaysAPI
 import org.joda.time.LocalDateTime
 import org.springframework.web.client.RestTemplate
 import org.springframework.core.ParameterizedTypeReference
