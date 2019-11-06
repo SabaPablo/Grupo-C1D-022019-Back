@@ -130,7 +130,6 @@ class Menu (
                     deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, category, provider)
         }
 
-
     }
 
 }
