@@ -43,6 +43,7 @@ class Menu (
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
 
+
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
     val orders: MutableSet<Order> = mutableSetOf()
 

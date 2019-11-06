@@ -1,5 +1,6 @@
 package com.unq.viendasya.controller
 
+import com.unq.viendasya.controller.apiModels.MaxiOrder
 import com.unq.viendasya.controller.apiModels.MiniOrder
 import com.unq.viendasya.model.Order
 import com.unq.viendasya.service.OrderService
@@ -16,4 +17,9 @@ class OrderController(@Autowired val orderService: OrderService) {
         return orderService.createOrder(data)
     }
 
+    @CrossOrigin
+    @GetMapping("/orders")
+    fun getOrdersbyQueryAndUserId(@RequestParam(value = "userId", defaultValue = "0") userId: Int) : List<MaxiOrder> {
+        return orderService.findByUserId(userId)
+    }
 }
