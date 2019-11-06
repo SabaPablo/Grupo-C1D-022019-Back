@@ -1,6 +1,7 @@
 package com.unq.viendasya.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.type.descriptor.java.DateTypeDescriptor.DATE_FORMAT
 import org.joda.time.LocalDateTime
 import javax.persistence.*
@@ -9,13 +10,17 @@ import javax.persistence.*
 @Table(name = "orders")
 class Order (
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "menu_id", referencedColumnName = "id")
+        @JoinColumn(name = "menu_id")
+        @JsonIgnore
         var menu: Menu,
+
         var cant: Int,
         @JsonFormat(pattern = DATE_FORMAT)
         var date: LocalDateTime,
+
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "client_id")
+        @JsonIgnore
         var client: User
 ) {
 
