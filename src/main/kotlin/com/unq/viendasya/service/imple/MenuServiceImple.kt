@@ -25,6 +25,7 @@ class MenuServiceImple(@Autowired private val  dao: MenuRepository, @Autowired p
                 .cantMaxPeerDay(data.cantMaxPerDay)
                 .description(data.description)
                 .urlImage(data.urlImage)
+                .category(data.category)
                 //.deliveryTime(data.DeliveryTime)
                 .deliveryValue(data.priceDelivery.toDouble())
                 //.expiration(LocalDate(data.dateEnd))

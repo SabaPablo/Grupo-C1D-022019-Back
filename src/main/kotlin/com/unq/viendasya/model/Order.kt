@@ -10,7 +10,7 @@ import javax.persistence.*
 @Table(name = "orders")
 class Order (
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "menu_id", referencedColumnName = "id")
+        @JoinColumn(name = "menu_id")
         @JsonIgnore
         var menu: Menu,
         var cant: Int,
