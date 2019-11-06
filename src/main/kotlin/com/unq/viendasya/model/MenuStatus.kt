@@ -8,8 +8,6 @@ enum class MenuStatus {
                 newStatus = CANCELED
                 provider.verifyStaus()
                 //provider.sendMailCancelMenu()
-            //TODO: NO SE BIEN SI PONERLO ACA NO DEBERIA SER RESPONSABILIDAD DE ESTA CLASE EN
-            // TODO CASO LE PASARIA EL MENU EN VEZ DE RATE
 
             return newStatus
         }

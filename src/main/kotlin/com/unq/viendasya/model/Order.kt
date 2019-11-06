@@ -13,11 +13,9 @@ class Order (
         @JoinColumn(name = "menu_id")
         @JsonIgnore
         var menu: Menu,
-
         var cant: Int,
         @JsonFormat(pattern = DATE_FORMAT)
         var date: LocalDateTime,
-
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "client_id")
         @JsonIgnore
