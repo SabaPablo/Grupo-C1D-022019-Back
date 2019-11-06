@@ -18,6 +18,12 @@ class MenuController(@Autowired private val  menuService: MenuService) {
     }
 
     @CrossOrigin
+    @GetMapping("/menus/{id}")
+    fun getMenuById(@PathVariable("id") id: Int) : Menu? {
+        return menuService.findById(id)
+    }
+
+    @CrossOrigin
     @GetMapping("/menus/query")
     fun getMenusbyQuery(@RequestParam(value = "query", defaultValue = "") query: String) : List<Menu> {
         return menuService.findByQuery(query)

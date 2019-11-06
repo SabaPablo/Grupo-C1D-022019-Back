@@ -1,6 +1,6 @@
 package com.unq.viendasya.controller.apiModels
 
-data class MiniMenu(val name: String,
+data class MaxiMenu(val name: String,
                     val description: String,
                     val category: MutableList<String>,
                     val priceDelivery: Int,
@@ -8,8 +8,9 @@ data class MiniMenu(val name: String,
                     val dateEnd: String,
                     //val turn: String,
                     //val DeliveryTime: String,
+                    val rate: Double,
                     val urlImage: String,
-                    val idProvider: Int,
+                    val provider: MiniProvider,
                     val price: String,
                     val cantMin: Int,
                     val priceMin: String,
