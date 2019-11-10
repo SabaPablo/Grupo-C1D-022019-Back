@@ -43,7 +43,7 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
         val menu = menuService.findById(data.idMenu)
         menu?.let{
             client?.let {
-                val order = Order.Builder().menu(menu).client(client).build()
+                val order = Order.Builder().menu(menu).client(client).cant(data.cant).build()
 
                 return dao.save(order)
             }

@@ -12,6 +12,7 @@ import javax.validation.Valid
 @RequestMapping("/api")
 class OrderController(@Autowired val orderService: OrderService) {
 
+    @CrossOrigin
     @PostMapping("/orders")
     fun createOrders(@Valid @RequestBody data : MiniOrder): Order? {
         return orderService.createOrder(data)
