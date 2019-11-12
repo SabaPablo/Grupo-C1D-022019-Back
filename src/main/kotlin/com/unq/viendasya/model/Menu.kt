@@ -32,6 +32,8 @@ class Menu (
     var cantMax : Int,
     var priceCantMax: Double,
     var cantMaxPeerDay: Int,
+    @ElementCollection
+    var category: MutableList<String>,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "provider_id", referencedColumnName = "id")
     @JsonIgnore
@@ -40,6 +42,7 @@ class Menu (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
+
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "client")
     val orders: MutableSet<Order> = mutableSetOf()
@@ -84,6 +87,7 @@ class Menu (
             var urlImage:String  = "",
             var deliveryValue: Double = 0.0,
             var rate: MutableList<Int> = mutableListOf(),
+            var category: MutableList<String> = mutableListOf(),
             var validity: LocalDate = LocalDate(),
             var expiration: LocalDate = LocalDate(),
             //Turnos/Horarios de entrega/Envio
@@ -98,11 +102,10 @@ class Menu (
             var provider: User = User.Builder().build()
     ){
 
-        //val category: MutableList<ServiceCategory> = mutableListOf()
 
         fun name(name: String) = apply { this.name = name }
         fun description(description: String) = apply { this.description= description}
-        //fun category(category: ServiceCategory) = apply { this.category.add(category)}
+        fun category(category: MutableList<String>) = apply { this.category = category}
         fun urlImage(urlImage: String) = apply { this.urlImage= urlImage}
         fun deliveryValue(deliveryValue: Double) = apply { this.deliveryValue= deliveryValue}
         fun validity(validity: LocalDate) = apply { this.validity= validity}
@@ -117,7 +120,6 @@ class Menu (
         fun cantMaxPeerDay(cantMaxPeerDay: Int) = apply { this.cantMaxPeerDay= cantMaxPeerDay}
         fun provider(provider: User) = apply { this.provider= provider}
 
-
         fun build() : Menu {
             val status: MenuStatus = if(expiration.isAfter(LocalDate.now())){
                 MenuStatus.ACTIVE
@@ -125,7 +127,7 @@ class Menu (
                 MenuStatus.EXPIRE
             }
             return Menu(name, description, urlImage, deliveryValue, rate ,validity, expiration, turn,
-                    deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, provider)
+                    deliveryTime, status, price, cantMin, priceCantMin, cantMax, priceCantMax, cantMaxPeerDay, category, provider)
         }
 
     }

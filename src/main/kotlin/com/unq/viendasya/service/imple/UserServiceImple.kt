@@ -55,5 +55,4 @@ class UserServiceImple(@Autowired val dao: UserRepository): UserService {
         return user?.creditAccount ?: 0.0
     }
 
-
 }
