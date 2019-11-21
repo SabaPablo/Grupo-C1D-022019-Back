@@ -26,6 +26,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("joda-time:joda-time:2.10.3")
+	implementation("org.springframework:spring-context-support")
 
 
 	implementation("io.springfox:springfox-swagger2:2.9.2")
