@@ -29,7 +29,10 @@ dependencies {
 	implementation("joda-time:joda-time:2.10.3")
 	implementation("org.springframework:spring-context-support")
 
-
+	implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
+	implementation("org.apache.logging.log4j:log4j-api:2.11.1")
+	implementation("org.apache.logging.log4j:log4j-core:2.11.1")
+	
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 

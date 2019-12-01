@@ -1,0 +1,2 @@
+2019-12-01 15:56:46,702 ERROR [http-nio-8080-exec-1] c.u.v.r.UserRepository [UserServiceImpl.kt:46] Didn't do it.
+2019-12-01 15:58:17,204 ERROR [http-nio-8080-exec-9] c.u.v.r.UserRepository [UserServiceImpl.kt:46] Didn't do it.
