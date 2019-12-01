@@ -15,7 +15,7 @@ import java.util.*
 import javax.transaction.Transactional
 
 @Service
-class MenuServiceImple(@Autowired private val  dao: MenuRepository, @Autowired private val service: UserRepository) : MenuService {
+class MenuServiceImp(@Autowired private val  dao: MenuRepository, @Autowired private val service: UserRepository) : MenuService {
 
     override fun createMenu(data: MiniMenu): Menu? {
         val provider = service.findById(data.idProvider)

@@ -125,10 +125,10 @@ class User(
         var canOrder = false
 
         if(menu.cantMaxPeerDay > cant){
-            if( menu.orders.size !== 0 ){
+            if( menu.orders.size != 0 ){
                 val order = menu.orders.filter { order -> order.menu == menu }
                 //TODO CUANDO USEMOS BIEN TEMA FECHA HAYQ AGREGAR ESTO AL FILTER && order.date == date}.last()
-                if (order.size !== 0){
+                if (order.isNotEmpty()){
                     canOrder = order.last().menu.cantMaxPeerDay > order.last().cant() + cant
                 }
             }else{
@@ -139,10 +139,10 @@ class User(
         return canOrder
     }
 
-    fun closeOrders(aMenu: Menu) {
-        val quantityOfOrders = aMenu.orders.map { order -> order.cant() }.sum()
+    fun closeOrders(orders: MutableSet<Order>) {
+        val quantityOfOrders = orders.map { order -> order.cant() }.sum()
 
-        aMenu.orders.map { order -> order.close(quantityOfOrders) }
+        orders.map { order -> order.close(quantityOfOrders) }
     }
 
     fun accountsStaiment(priceDiff: Double) {

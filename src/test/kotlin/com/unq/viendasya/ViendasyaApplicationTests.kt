@@ -97,7 +97,7 @@ class ViendasyaApplicationTests {
         Assert.assertEquals(0.0, anyClient.accountBalance(),0.01)
         Assert.assertEquals(0.0,otherClient.accountBalance(), 0.01)
 
-        provider.closeOrders(menu)
+        provider.closeOrders(menu.orders)
 
         Assert.assertEquals(100.0, anyClient.accountBalance(),0.01)
         Assert.assertEquals(200.0,otherClient.accountBalance(), 0.01)
