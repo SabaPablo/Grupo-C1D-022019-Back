@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 
 @Service
 
-class UserServiceImple(@Autowired val dao: UserRepository): UserService {
+class UserServiceImpl(@Autowired val dao: UserRepository): UserService {
 
     override fun findByMail(mail: String): User? {
         return dao.findByEmail(mail)

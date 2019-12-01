@@ -1,6 +1,6 @@
 package com.unq.viendasya.service.imple
 
-import com.unq.viendasya.service.EmailService
+import com.unq.viendasya.service.MailService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.mail.SimpleMailMessage
@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Component
 
 @Component
-class EmailServiceImpl: EmailService {
+class EmailServiceImpl: MailService {
 
     @Qualifier("getJavaMailSender")
     @Autowired
