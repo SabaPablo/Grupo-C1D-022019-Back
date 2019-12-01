@@ -1,8 +1,6 @@
 package com.unq.viendasya.model
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.hibernate.type.descriptor.java.DateTypeDescriptor.DATE_FORMAT
 import org.joda.time.LocalDateTime
 import javax.persistence.*
 
@@ -14,8 +12,10 @@ class Order (
         @JsonIgnore
         var menu: Menu,
         var cant: Int,
-        @JsonFormat(pattern = DATE_FORMAT)
-        var date: LocalDateTime,
+        var date: Long,
+        var rate: Int,
+        var status: OrderStatus,
+        var delivery: Boolean,
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "client_id")
         @JsonIgnore
@@ -47,20 +47,27 @@ class Order (
     fun close(totalNumbersOfOrders: Int){
         val priceDiff = cant * (menu.price - this.menuPrice(totalNumbersOfOrders))
         client.chargeCredit(priceDiff)
+        status = OrderStatus.Accept
         menu.provider.accountsStaiment(priceDiff)
-        //this.client.sendMailsConfirmation()
+
     }
 
     data class Builder(
             var menu: Menu = Menu.Builder().build(),
             var cant: Int = 0,
-            var date: LocalDateTime = LocalDateTime.now(),
+            var date: Long = LocalDateTime.now().toDate().time,
+            var status: OrderStatus = OrderStatus.Pending,
+            var rate: Int = 0,
+            var delivery: Boolean = false,
             var client: User = User.Builder().build()
     ) {
         fun menu(menu: Menu) = apply { this.menu = menu }
         fun cant(cant: Int) = apply { this.cant = cant }
-        fun date(date: LocalDateTime) = apply { this.date = date}
+        fun rate(rate: Int) = apply { this.rate = rate }
+        fun status(status: OrderStatus) = apply { this.status = status }
+        fun date(date: LocalDateTime) = apply { this.date = date.toDate().time}
         fun client(client: User) = apply { this.client = client }
-        fun build() = Order(menu, cant, date, client)
+        fun delivery(delivery: Boolean) = apply { this.delivery = delivery }
+        fun build() = Order(menu, cant, date,rate, status, delivery, client)
     }
 }
