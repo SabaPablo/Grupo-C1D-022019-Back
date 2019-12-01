@@ -33,21 +33,12 @@ dependencies {
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
-	/*
-	// Koin for Kotlin
-	val koin_version = "2.0.1"
-	implementation("org.koin:koin-core:$koin_version")
-	// Koin extended & experimental features
-	implementation("org.koin:koin-core-ext:$koin_version")
-	// Koin for Unit tests
-	testImplementation("org.koin:koin-test:$koin_version")
-	// Koin for Java developers
-	implementation("org.koin:koin-java:$koin_version")
-	
-	 */
-
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation ("com.tngtech.archunit:archunit-junit5-api:0.9.3")
+	testImplementation ("com.tngtech.archunit:archunit-junit5-engine:0.9.3")
+
+	
 }
 
 tasks.withType<KotlinCompile> {

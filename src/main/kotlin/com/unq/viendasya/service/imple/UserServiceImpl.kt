@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-
 class UserServiceImpl(@Autowired val dao: UserRepository): UserService {
 
     override fun findByMail(mail: String): User? {
