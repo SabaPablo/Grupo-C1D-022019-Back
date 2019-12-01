@@ -139,10 +139,10 @@ class User(
         return canOrder
     }
 
-    fun closeOrders(aMenu: Menu) {
-        val quantityOfOrders = aMenu.orders.map { order -> order.cant() }.sum()
+    fun closeOrders(orders: MutableSet<Order>) {
+        val quantityOfOrders = orders.map { order -> order.cant() }.sum()
 
-        aMenu.orders.map { order -> order.close(quantityOfOrders) }
+        orders.map { order -> order.close(quantityOfOrders) }
     }
 
     fun accountsStaiment(priceDiff: Double) {

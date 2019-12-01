@@ -8,6 +8,8 @@ import com.unq.viendasya.repository.UserRepository
 import com.unq.viendasya.service.MenuService
 import org.joda.time.LocalDate
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.lang.Exception
@@ -36,8 +38,8 @@ class MenuServiceImple(@Autowired private val  dao: MenuRepository, @Autowired p
         return dao.save(menu)
     }
 
-    override fun findAll(): List<Menu> {
-        return dao.findAll()
+    override fun findAll(pageable: Pageable): Page<Menu> {
+        return dao.findAll(pageable)
     }
     override fun findByQuery(query: String): List<Menu> {
         return dao.findByQuery("%${query.toUpperCase()}%")
