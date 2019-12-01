@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
 interface MenuService {
-    fun createMenu(menu: MiniMenu) : Menu?
+    fun createMenu(data: MiniMenu) : Menu?
     fun findById(idMenu: Int): Menu?
     fun findAll(pageable: Pageable): Page<Menu>
     fun findByQuery(query: String): List<Menu>
