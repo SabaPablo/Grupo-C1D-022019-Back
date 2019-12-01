@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger
 import org.apache.logging.log4j.LogManager
 
 @Service
-
 class UserServiceImpl(@Autowired val dao: UserRepository): UserService {
 
     private val logger: Logger = LogManager.getLogger("log-Process")
