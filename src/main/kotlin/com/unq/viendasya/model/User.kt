@@ -1,8 +1,8 @@
 package com.unq.viendasya.model
 
 import com.unq.viendasya.exception.*
-import com.unq.viendasya.service.RestHolidaysAPI
-import com.unq.viendasya.service.imple.RestHolidaysAPIImple
+import com.unq.viendasya.aux.RestHolidaysAPI
+import com.unq.viendasya.aux.impl.RestHolidaysAPIImple
 import org.joda.time.Hours
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -116,18 +116,17 @@ class User(
 
     }
 
-    fun addOrder(order: Order, menu: Menu) {
+    private fun addOrder(order: Order, menu: Menu) {
         menu.orders.add(order)
         //creditAccount = creditAccount + (order.menu.standarPrice() * order.cant)
     }
 
-    fun canOrderByCant(menu: Menu, cant: Int, date: LocalDateTime): Boolean {
+    private fun canOrderByCant(menu: Menu, cant: Int, date: LocalDateTime): Boolean {
         var canOrder = false
 
         if(menu.cantMaxPeerDay > cant){
             if( menu.orders.size != 0 ){
                 val order = menu.orders.filter { order -> order.menu == menu }
-                //TODO CUANDO USEMOS BIEN TEMA FECHA HAYQ AGREGAR ESTO AL FILTER && order.date == date}.last()
                 if (order.isNotEmpty()){
                     canOrder = order.last().menu.cantMaxPeerDay > order.last().cant() + cant
                 }

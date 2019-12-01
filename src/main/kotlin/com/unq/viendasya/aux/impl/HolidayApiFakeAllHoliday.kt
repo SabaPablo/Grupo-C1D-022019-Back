@@ -1,6 +1,6 @@
-package com.unq.viendasya.service.imple
+package com.unq.viendasya.aux.impl
 
-import com.unq.viendasya.service.RestHolidaysAPI
+import com.unq.viendasya.aux.RestHolidaysAPI
 import org.joda.time.LocalDateTime
 
 class HolidayApiFakeAllHoliday: RestHolidaysAPI {

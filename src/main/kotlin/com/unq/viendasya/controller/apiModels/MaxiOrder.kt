@@ -12,5 +12,4 @@ class MaxiOrder(val menuName: String,
                 val menuPrice: Double,
                 val status: OrderStatus,
                 val cant: Int
-                ) {
-}
+                )
