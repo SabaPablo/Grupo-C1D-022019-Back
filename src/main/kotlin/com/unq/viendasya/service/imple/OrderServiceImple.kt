@@ -2,6 +2,7 @@ package com.unq.viendasya.service.imple
 
 import com.unq.viendasya.controller.apiModels.MaxiOrder
 import com.unq.viendasya.controller.apiModels.MiniOrder
+import com.unq.viendasya.model.MenuStatus
 import com.unq.viendasya.model.Order
 import com.unq.viendasya.model.OrderStatus
 import com.unq.viendasya.repository.OrderRepository
@@ -50,7 +51,10 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
         if(optionalOrder.isPresent){
             val order = optionalOrder.get()
             order.rate = valoration
-            order.menu.rate.add(valoration)
+            order.menu.rate(valoration)
+            if(order.menu.status == MenuStatus.CANCELED) {
+                mailService.sendSimpleMessage(order.menu.provider.email, "Tu menu se cancelo", "Tenes un menu con mas de 5 calificaciones negativas... cocina bien")
+            }
             order.status = OrderStatus.Closed
             dao.save(order)
             return convertoMaxiMenu(order)
