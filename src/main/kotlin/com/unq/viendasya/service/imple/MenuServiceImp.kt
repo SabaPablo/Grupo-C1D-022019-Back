@@ -6,6 +6,8 @@ import com.unq.viendasya.model.Menu
 import com.unq.viendasya.repository.MenuRepository
 import com.unq.viendasya.repository.UserRepository
 import com.unq.viendasya.service.MenuService
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.joda.time.LocalDate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -18,6 +20,9 @@ import javax.transaction.Transactional
 
 @Service
 class MenuServiceImp(@Autowired private val  dao: MenuRepository, @Autowired private val service: UserRepository) : MenuService {
+
+    private val logger: Logger = LogManager.getLogger("log-Process")
+
 
     override fun createMenu(data: MiniMenu): Menu? {
         val provider = service.findById(data.idProvider)
@@ -35,6 +40,8 @@ class MenuServiceImp(@Autowired private val  dao: MenuRepository, @Autowired pri
                 .priceCantMin(data.priceMin.toDouble())
                 .priceCantMax(data.priceMax.toDouble())
                 .provider(provider.get()).build()
+        logger.info("menu created")
+
         return dao.save(menu)
     }
 

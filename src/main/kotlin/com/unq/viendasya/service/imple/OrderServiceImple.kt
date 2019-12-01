@@ -10,6 +10,8 @@ import com.unq.viendasya.service.MailService
 import com.unq.viendasya.service.MenuService
 import com.unq.viendasya.service.OrderService
 import com.unq.viendasya.service.UserService
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,11 +26,12 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
                         @Autowired val menuService: MenuService,
                         @Autowired val mailService: MailService): OrderService {
 
+    private val logger: Logger = LogManager.getLogger("log-Process")
+
+
     override fun findByUserId(userId: Int): List<MaxiOrder> {
         val orders = dao.findByUserId(userId)
-        val maxiMenues = orders.map { order -> this.convertoMaxiMenu( order ) }
-
-        return maxiMenues
+        return orders.map { order -> convertoMaxiMenu( order ) }
     }
 
     override fun closeOrder(dateTime: LocalDateTime) {
@@ -41,6 +44,7 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
                 order.close(it.value.size)
                 mailService.sendSimpleMessage(order.client.email,"Orden N"+ order.id, "tu orden fue confirmada, en dos dias te llega" )
                 mailService.sendSimpleMessage(order.menu.provider.email,"Orden N"+ order.id, "EL pedido fue confirmado, mandale al morfi" )
+                logger.info("order closed id: ${order.id}")
                 dao.save(order)
             }
         }
@@ -85,6 +89,7 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
         menu?.let{
             client?.let {
                 val order = Order.Builder().menu(menu).client(client).date(org.joda.time.LocalDateTime(data.deliveryDate)).cant(data.cant).delivery(data.delivery).build()
+                logger.info("order created")
                 return dao.save(order)
             }
         }

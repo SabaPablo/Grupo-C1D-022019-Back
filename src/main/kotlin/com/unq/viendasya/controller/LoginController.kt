@@ -12,6 +12,7 @@ import javax.validation.Valid
 class LoginController(@Autowired val clientService: UserService ) {
 
 
+
     @CrossOrigin
     @PostMapping("/login")
     fun login(@Valid @RequestBody login : Login): Login {
