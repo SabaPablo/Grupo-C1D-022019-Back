@@ -19,7 +19,8 @@ class MenuController(@Autowired private val  menuService: MenuService) {
 
     @CrossOrigin
     @GetMapping("/menus")
-    fun getMenus(pageNumber: Int, pageSize: Int) : Page<Menu> {
+    fun getMenus(@RequestParam(value = "pageNumber", defaultValue = "0") pageNumber: Int,
+                 @RequestParam(value = "pageSize", defaultValue = "10") pageSize: Int) : Page<Menu> {
         val page: Pageable = PageRequest.of(pageNumber, pageSize)
         return menuService.findAll(page)
     }
