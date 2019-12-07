@@ -1,0 +1,6 @@
+2019-12-01 16:52:50,538 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:46] Adding credit
+2019-12-01 16:52:50,584 ERROR [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:57] no added credit
+2019-12-01 16:52:56,065 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:46] Adding credit
+2019-12-01 16:52:56,068 ERROR [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:57] no added credit
+2019-12-01 16:53:11,974 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:46] Adding credit
+2019-12-01 16:53:11,976 ERROR [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:57] no added credit

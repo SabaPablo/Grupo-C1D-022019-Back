@@ -6,8 +6,12 @@ import com.unq.viendasya.model.Menu
 import com.unq.viendasya.repository.MenuRepository
 import com.unq.viendasya.repository.UserRepository
 import com.unq.viendasya.service.MenuService
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.joda.time.LocalDate
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.lang.Exception
@@ -15,7 +19,10 @@ import java.util.*
 import javax.transaction.Transactional
 
 @Service
-class MenuServiceImple(@Autowired private val  dao: MenuRepository, @Autowired private val service: UserRepository) : MenuService {
+class MenuServiceImp(@Autowired private val  dao: MenuRepository, @Autowired private val service: UserRepository) : MenuService {
+
+    private val logger: Logger = LogManager.getLogger("log-Process")
+
 
     override fun createMenu(data: MiniMenu): Menu? {
         val provider = service.findById(data.idProvider)
@@ -33,11 +40,13 @@ class MenuServiceImple(@Autowired private val  dao: MenuRepository, @Autowired p
                 .priceCantMin(data.priceMin.toDouble())
                 .priceCantMax(data.priceMax.toDouble())
                 .provider(provider.get()).build()
+        logger.info("menu created")
+
         return dao.save(menu)
     }
 
-    override fun findAll(): List<Menu> {
-        return dao.findAll()
+    override fun findAll(pageable: Pageable): Page<Menu> {
+        return dao.findAll(pageable)
     }
     override fun findByQuery(query: String): List<Menu> {
         return dao.findByQuery("%${query.toUpperCase()}%")

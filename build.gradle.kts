@@ -21,31 +21,27 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc:1.2.7.RELEASE")
 	implementation("org.springframework.security:spring-security-core")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("joda-time:joda-time:2.10.3")
+	implementation("org.springframework:spring-context-support")
 
-
+	implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
+	implementation("org.apache.logging.log4j:log4j-api:2.11.1")
+	implementation("org.apache.logging.log4j:log4j-core:2.11.1")
+	
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
-	/*
-	// Koin for Kotlin
-	val koin_version = "2.0.1"
-	implementation("org.koin:koin-core:$koin_version")
-	// Koin extended & experimental features
-	implementation("org.koin:koin-core-ext:$koin_version")
-	// Koin for Unit tests
-	testImplementation("org.koin:koin-test:$koin_version")
-	// Koin for Java developers
-	implementation("org.koin:koin-java:$koin_version")
-	
-	 */
-
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation ("com.tngtech.archunit:archunit-junit5-api:0.9.3")
+	testImplementation ("com.tngtech.archunit:archunit-junit5-engine:0.9.3")
+
+	
 }
 
 tasks.withType<KotlinCompile> {

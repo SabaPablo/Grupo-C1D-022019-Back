@@ -6,8 +6,8 @@ import com.unq.viendasya.exception.MaxCantPeerDayException
 import com.unq.viendasya.exception.OrderInHolidayException
 import com.unq.viendasya.model.User
 import com.unq.viendasya.model.Menu
-import com.unq.viendasya.service.imple.HolidayApiFakeAllHoliday
-import com.unq.viendasya.service.imple.HolidayApiFakeAllNonHoliday
+import com.unq.viendasya.aux.impl.HolidayApiFakeAllHoliday
+import com.unq.viendasya.aux.impl.HolidayApiFakeAllNonHoliday
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.junit.Assert
@@ -50,7 +50,6 @@ class ClientUnitTests {
                 .holidaysAPI(HolidayApiFakeAllNonHoliday())
                 .email("zaraza@mail.com")
                 .phone("3344-4332").build()
-//TODO LIMPIAR LAS COSAS DE LOS TEST Q NO TIENEN SENTIDO EJ name, email y phone DE UN CLIENTE Q NO ME IMPORTAN ESOS DATOS
 
         val menu: Menu = Menu.Builder().name("menu 11")
                 .price(200.0).cantMin(5).cantMax(30).cantMaxPeerDay(50)

@@ -51,16 +51,7 @@ class Menu (
         return this.price
     }
 
-    fun ordersOfDay(date: LocalDateTime): Int {
-        val ordersOfDay = orders.filter { it.date.year == date.year &&
-                it.date.monthOfYear == date.monthOfYear
-                && it.date.dayOfMonth == date.dayOfMonth}
-        var cantOrdersInTheDay = 0
-        ordersOfDay.forEach { ood ->
-            cantOrdersInTheDay += ood.cant
-        }
-        return cantOrdersInTheDay
-    }
+
 
     fun addOrder(order: Order) {
         orders.add(order)
@@ -78,6 +69,7 @@ class Menu (
     fun addRanking(value: Int) = apply {
         rate.add(value)
         status = status.verify(rate, provider)
+
     }
 
 

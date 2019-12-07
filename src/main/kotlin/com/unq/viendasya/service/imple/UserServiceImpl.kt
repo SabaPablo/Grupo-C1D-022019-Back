@@ -11,12 +11,16 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import org.apache.logging.log4j.Logger
+import org.apache.logging.log4j.LogManager
 
 @Service
+class UserServiceImpl(@Autowired val dao: UserRepository): UserService {
 
-class UserServiceImple(@Autowired val dao: UserRepository): UserService {
+    private val logger: Logger = LogManager.getLogger("log-Process")
 
     override fun findByMail(mail: String): User? {
+        logger.info("sucess querry by mail: $mail")
         return dao.findByEmail(mail)
     }
 
@@ -31,6 +35,8 @@ class UserServiceImple(@Autowired val dao: UserRepository): UserService {
                 .phone(data.phone)
                            .email(data.mail)
                            .build()
+        logger.info("Client Created")
+
         return dao.save(client)
     }
 
@@ -39,6 +45,8 @@ class UserServiceImple(@Autowired val dao: UserRepository): UserService {
     }
 
     override fun addCreditById(userId: Int, amount: Double): CreditRes {
+        logger.info("Adding credit")
+
         val user = findById(userId)
         val res = CreditRes(0,0.0)
         user?.let{
@@ -46,6 +54,10 @@ class UserServiceImple(@Autowired val dao: UserRepository): UserService {
             dao.save(it)
             res.user_id = it.id
             res.amount = it.creditAccount
+            logger.info("Added credit")
+        }?:kotlin.run{
+            logger.error("no added credit")
+
         }
         return res
     }
