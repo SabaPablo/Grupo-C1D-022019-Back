@@ -4,3 +4,47 @@
 2019-12-01 16:52:56,068 ERROR [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:57] no added credit
 2019-12-01 16:53:11,974 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:46] Adding credit
 2019-12-01 16:53:11,976 ERROR [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:57] no added credit
+2019-12-07 22:26:06,238 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:28:57,570 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:28:57,697 INFO [http-nio-8080-exec-4] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:29:06,786 INFO [http-nio-8080-exec-6] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:29:18,810 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:46] Adding credit
+2019-12-07 22:29:18,814 ERROR [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:57] no added credit
+2019-12-07 22:29:22,505 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:46] Adding credit
+2019-12-07 22:29:22,512 ERROR [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:57] no added credit
+2019-12-07 22:31:04,437 INFO [http-nio-8080-exec-5] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:31:04,446 INFO [http-nio-8080-exec-6] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:31:12,908 INFO [http-nio-8080-exec-7] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:34:07,717 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:34:07,735 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:34:30,670 INFO [http-nio-8080-exec-5] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:34:30,677 INFO [http-nio-8080-exec-6] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:34:37,774 INFO [http-nio-8080-exec-7] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:36:09,797 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:36:09,803 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:36:23,341 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:39:28,216 INFO [http-nio-8080-exec-8] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:39:28,221 INFO [http-nio-8080-exec-7] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:39:44,722 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:39:44,729 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:39:53,487 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:40:36,580 INFO [http-nio-8080-exec-8] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:40:36,585 INFO [http-nio-8080-exec-7] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:40:44,105 INFO [http-nio-8080-exec-9] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:41:44,120 INFO [http-nio-8080-exec-4] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:41:44,125 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:42:04,433 INFO [http-nio-8080-exec-5] log-Process [UserServiceImpl.kt:36] Client Created
+2019-12-07 22:42:13,911 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:46] Adding credit
+2019-12-07 22:42:13,924 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:55] Added credit
+2019-12-07 22:49:31,793 INFO [http-nio-8080-exec-6] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:49:31,799 INFO [http-nio-8080-exec-5] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:55:09,215 INFO [http-nio-8080-exec-10] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:55:09,225 INFO [http-nio-8080-exec-9] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:58:13,231 INFO [http-nio-8080-exec-4] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 22:58:13,237 INFO [http-nio-8080-exec-3] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 23:01:28,210 INFO [http-nio-8080-exec-7] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 23:01:28,217 INFO [http-nio-8080-exec-8] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 23:07:00,383 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 23:07:00,387 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 23:09:20,600 INFO [http-nio-8080-exec-6] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-07 23:09:20,606 INFO [http-nio-8080-exec-5] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com

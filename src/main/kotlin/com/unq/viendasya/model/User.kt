@@ -30,8 +30,7 @@ class User(
         var menues: MutableList<Menu>,
 
         @Transient
-        var holidaysAPI: RestHolidaysAPI,
-        val password: String) {
+        var holidaysAPI: RestHolidaysAPI) {
 
 
 
@@ -173,7 +172,6 @@ class User(
             var distanceDelivery: Int = 0,
             var creditAccount: Double = 0.0,
             var status: ProviderStatus = ProviderStatus.ACTIVE,
-            var password: String = "",
             var holidaysAPI: RestHolidaysAPI = RestHolidaysAPIImple(),
             var menues :MutableList<Menu> = mutableListOf()) {
 
@@ -187,11 +185,10 @@ class User(
         fun webSite(webSite: String) = apply { this.webSite = webSite }
         fun disponibility(disponibility: String) = apply { this.disponibility = disponibility }
         fun status(status: ProviderStatus) = apply { this.status = status }
-        fun password(password: String) = apply { this.password = password }
 
         fun holidaysAPI(holidaysAPI: RestHolidaysAPI) = apply { this.holidaysAPI = holidaysAPI }
         fun creditAccount(creditAccount: Double) = apply { this.creditAccount = creditAccount }
-        fun build() = User(name,logo, email, phone,webSite,description, location, creditAccount,disponibility,distanceDelivery,status,menues, holidaysAPI, password)
+        fun build() = User(name,logo, email, phone,webSite,description, location, creditAccount,disponibility,distanceDelivery,status,menues, holidaysAPI)
 
     }
 }
