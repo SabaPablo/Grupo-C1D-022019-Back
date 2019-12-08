@@ -11,7 +11,6 @@ class MiniClient(
                  @field:NotNull
                 @field:Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
                  var mail: String,
-                 var password: String,
                  var address: String,
                  var phone: String,
                  var city: String,
