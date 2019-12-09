@@ -48,3 +48,10 @@
 2019-12-07 23:07:00,387 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
 2019-12-07 23:09:20,600 INFO [http-nio-8080-exec-6] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
 2019-12-07 23:09:20,606 INFO [http-nio-8080-exec-5] log-Process [UserServiceImpl.kt:22] sucess querry by mail: testmailsenderdesaunq@gmail.com
+2019-12-09 02:16:19,366 INFO [http-nio-8080-exec-1] log-Process [UserServiceImpl.kt:22] sucess querry by mail: sabaliauskaspablo@gmail.com
+2019-12-09 02:16:19,570 INFO [http-nio-8080-exec-2] log-Process [UserServiceImpl.kt:22] sucess querry by mail: sabaliauskaspablo@gmail.com
+2019-12-09 02:16:33,642 INFO [http-nio-8080-exec-7] log-Process [OrderServiceImple.kt:91] order created
+2019-12-09 02:16:40,985 INFO [http-nio-8080-exec-8] log-Process [OrderServiceImple.kt:91] order created
+2019-12-09 02:25:06,767 INFO [http-nio-8080-exec-1] log-Process [EmailServiceImpl.kt:26] mail sended to sabaliauskaspablo@gmail.com
+2019-12-09 02:25:11,563 INFO [http-nio-8080-exec-1] log-Process [EmailServiceImpl.kt:26] mail sended to sabaliauskaspablo@gmail.com
+2019-12-09 02:25:16,065 INFO [http-nio-8080-exec-1] log-Process [OrderServiceImple.kt:46] order closed id: 29
