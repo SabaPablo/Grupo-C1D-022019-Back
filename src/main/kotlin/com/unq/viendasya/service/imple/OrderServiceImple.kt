@@ -34,9 +34,8 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
     }
 
     override fun closeOrder(dateTime: LocalDateTime) {
-        val from = DateTime(dateTime.year, dateTime.monthValue, dateTime.dayOfMonth, 0, 0, 0, DateTimeZone.UTC)
         val to = DateTime(dateTime.year, dateTime.monthValue, dateTime.dayOfMonth, 23, 59, 59, DateTimeZone.UTC)
-        val orders = dao.getAllOrdersDueDate(from.toLocalDateTime().toDate().time, to.toLocalDateTime().toDate().time)
+        val orders = dao.getAllOrdersDueDate(to.toLocalDateTime().toDate().time)
         val list = orders.groupBy{it.menu.id}
         list.forEach{
             it.value.forEach { order ->
