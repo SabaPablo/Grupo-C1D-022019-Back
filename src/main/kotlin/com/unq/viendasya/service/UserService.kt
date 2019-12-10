@@ -13,4 +13,5 @@ interface UserService {
     fun findByMail(mail: String): User?
     fun addCreditById(userId: Int, amount: Double): CreditRes
     fun getAmountByUserId(userId: Int): Double
+    fun save(user: User)
 }

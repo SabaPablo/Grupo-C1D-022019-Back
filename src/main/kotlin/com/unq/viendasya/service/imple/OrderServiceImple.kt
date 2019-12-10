@@ -1,7 +1,9 @@
 package com.unq.viendasya.service.imple
 
+import com.unq.viendasya.controller.apiModels.AccountOrder
 import com.unq.viendasya.controller.apiModels.MaxiOrder
 import com.unq.viendasya.controller.apiModels.MiniOrder
+import com.unq.viendasya.exception.InsufficientCreditException
 import com.unq.viendasya.model.MenuStatus
 import com.unq.viendasya.model.Order
 import com.unq.viendasya.model.OrderStatus
@@ -81,17 +83,25 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
     }
 
 
-    override fun createOrder(data: MiniOrder): Order? {
+    override fun createOrder(data: MiniOrder): AccountOrder? {
         val client = clientService.findById(data.idClient)
         val menu = menuService.findById(data.idMenu)
+
         menu?.let{
             client?.let {
-                val order = Order.Builder().menu(menu).client(client).date(org.joda.time.LocalDateTime(data.deliveryDate)).cant(data.cant).delivery(data.delivery).build()
-                logger.info("order created")
-                return dao.save(order)
+                val totalPrice = menu.price * data.cant + if(data.delivery) menu.deliveryValue else 0.0
+                val hasMoney = client.creditAccount >= totalPrice
+                if(hasMoney){
+                    val order = Order.Builder().menu(menu).client(client).date(org.joda.time.LocalDateTime(data.deliveryDate)).cant(data.cant).delivery(data.delivery).build()
+                    logger.info("order created")
+                    client.chargeCredit(-totalPrice)
+                    clientService.save(client)
+                    return AccountOrder(dao.save(order), client.creditAccount)
+                }else {
+                    throw InsufficientCreditException("no credit")
+                }
             }
         }
-
         return null
     }
 
