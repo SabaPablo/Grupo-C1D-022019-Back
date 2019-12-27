@@ -42,8 +42,8 @@ class OrderServiceImple(@Autowired val dao: OrderRepository,
         list.forEach{
             it.value.forEach { order ->
                 order.close(it.value.size)
-                mailService.sendSimpleMessage(order.client.email,"Orden N"+ order.id, "tu orden fue confirmada, en dos dias te llega" )
-                mailService.sendSimpleMessage(order.menu.provider.email,"Orden N"+ order.id, "EL pedido fue confirmado, mandale al morfi" )
+                        //mailService.sendSimpleMessage(order.client.email,"Orden N"+ order.id, "tu orden fue confirmada, en dos dias te llega" )
+                //mailService.sendSimpleMessage(order.menu.provider.email,"Orden N"+ order.id, "EL pedido fue confirmado, mandale al morfi" )
                 logger.info("order closed id: ${order.id}")
                 dao.save(order)
             }
