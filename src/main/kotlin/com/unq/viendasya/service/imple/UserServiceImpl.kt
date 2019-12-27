@@ -65,4 +65,8 @@ class UserServiceImpl(@Autowired val dao: UserRepository): UserService {
         return user?.creditAccount ?: 0.0
     }
 
+    override fun save(user: User) {
+        dao.save(user)
+    }
+
 }

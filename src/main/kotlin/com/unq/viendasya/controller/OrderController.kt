@@ -1,11 +1,15 @@
 package com.unq.viendasya.controller
 
+import com.unq.viendasya.controller.apiModels.AccountOrder
 import com.unq.viendasya.controller.apiModels.MaxiOrder
 import com.unq.viendasya.controller.apiModels.MiniOrder
+import com.unq.viendasya.exception.InsufficientCreditException
 import com.unq.viendasya.model.Order
 import com.unq.viendasya.service.OrderService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.validation.Valid
@@ -16,8 +20,12 @@ class OrderController(@Autowired val orderService: OrderService) {
 
     @CrossOrigin
     @PostMapping("/orders")
-    fun createOrders(@Valid @RequestBody data : MiniOrder): Order? {
+    fun createOrders(@Valid @RequestBody data : MiniOrder): AccountOrder? {
+        try{
         return orderService.createOrder(data)
+        } catch (i: InsufficientCreditException) {
+            throw ResponseStatusException(HttpStatus.CONFLICT,"limit,credit", i)
+        }
     }
 
 
